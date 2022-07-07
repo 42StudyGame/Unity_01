@@ -1,4 +1,6 @@
 # Unity_01
 
-# 유니티 스터디 입니다!
-# 
+## Mento : m-jongfell-kim
+
+## curriculum : https://www.notion.so/jongfeel/42Seoul-unity-study-a7380b416f7540d7ab03e3b26286a2d3
+
