@@ -1,10 +1,8 @@
-# Unity_01
+# Mento : m-jongfell-kim
 
-## Mento : m-jongfell-kim
+# curriculum
 
-## curriculum
-
-### BOOK : 레트로의 유니티 게임프로그래밍
+## BOOK : 레트로의 유니티 게임프로그래밍
 
 - Github를 통해서 스터디 하는 방법 설명회, zoom 미팅
     
