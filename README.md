@@ -1,6 +1,6 @@
 # Unity Game programing Study
 
-# Mento : m-jongfell-kim
+# Mento : m-jfeel
 
 # curriculum
 
