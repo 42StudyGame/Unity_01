@@ -46,11 +46,11 @@ namespace Scenes
             const float height = 180.0f;
             const bool isFemale = false;
 
-            Debug.Log("캐릭터 이름 : " + characterName);
-            Debug.Log("혈액형 : " + bloodType);
-            Debug.Log("나이 : " + age);
-            Debug.Log("키 : " + height);
-            Debug.Log("여성인가? : " + isFemale);
+            Debug.Log($"캐릭터 이름 : {characterName}");
+            Debug.Log($"혈액형 : {bloodType}");
+            Debug.Log($"나이 : {age}");
+            Debug.Log($"키 : {height}");
+            Debug.Log($"여성인가? : {isFemale}");
         }
 
         private static void Distance()
@@ -158,11 +158,5 @@ namespace Scenes
         }
 
         private static float GetDistance(Vector2 v1, Vector2 v2) => Vector2.Distance(v1, v2);
-
-        // // Update is called once per frame
-        // void Update()
-        // {
-            
-        // }
     }
 }
