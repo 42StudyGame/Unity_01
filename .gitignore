@@ -10,14 +10,13 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
-/kyuhkim/week02/HelloCode/[Ll]ibrary/
-/kyuhkim/week02/HelloCode/[Tt]emp/
-/kyuhkim/week02/HelloCode/[Oo]bj/
-/kyuhkim/week02/HelloCode/[Bb]uild/
-/kyuhkim/week02/HelloCode/[Bb]uilds/
-/kyuhkim/week02/HelloCode/[Ll]ogs/
-/kyuhkim/week02/HelloCode/[Mm]emoryCaptures/
-
+/kyuhkim/week*/**/[Ll]ibrary/
+/kyuhkim/week*/**/[Tt]emp/
+/kyuhkim/week*/**/[Oo]bj/
+/kyuhkim/week*/**/[Bb]uild/
+/kyuhkim/week*/**/[Bb]uilds/
+/kyuhkim/week*/**/[Ll]ogs/
+/kyuhkim/week*/**/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
