@@ -1,25 +1,29 @@
-{\rtf1\ansi\ansicpg949\cocoartf2638
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+# 1주차: 1부 유니티 준비하기 전체 (32p - 123p)
+    ## 1장 유니티 준비하기
+    ## 2장 유니티 인터페이스 둘러보기
+    ## 3장 유니티 엔진이 동작하는 원리
+    ## 과제
+        1. 2장 중심으로 실제 유니티를 설치하고 사용하면서 영상을 제작해서 올려보기
+        2. 3장에서 논의하고 싶은 부분 1개 이상 작성하고 서로 얘기하고 이해하는 시간
 
-\f0\fs24 \cf0 \'c0\'af\'b4\'cf\'c6\'bc\'bf\'a1\'bc\'ad \'c4\'c4\'c6\'f7\'b3\'cd\'c6\'ae \'c6\'d0\'c5\'cf\'c0\'bb \'bc\'d2\'b0\'b3\'c7\'cf\'b8\'e9\'bc\'ad, \'bb\'f3\'bc\'d3\'ba\'b8\'b4\'d9\'b4\'c2 \'c0\'cc\'c2\'ca\'c0\'bb \'b1\'c7\'c0\'e5\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'b8\'b7\'ce \'ba\'b8\'c0\'ce\'b4\'d9.\
-\
-\'c4\'c4\'c6\'f7\'b3\'cd\'c6\'ae \'c6\'d0\'c5\'cf\'bf\'a1\'bc\'ad \'b8\'bb\'c7\'cf\'b4\'c2 \'b1\'e2\'b4\'c9\'c0\'c7 \'c1\'b6\'b8\'b3\'c0\'ba, OOP\'bf\'a1\'bc\'ad \'b8\'bb\'c7\'cf\'b4\'c2 \'a1\'ae\'c3\'a5\'c0\'d3\'a1\'af\'bf\'cd \'a1\'ae\'c7\'f9\'b7\'c2\'a1\'af\'b0\'fa \'b5\'bf\'c0\'cf\'c7\'d8\'ba\'b8\'c0\'ce\'b4\'d9.\
-\
-\'c0\'cc\'b5\'e9 \'c4\'c4\'c6\'f7\'b3\'cd\'c6\'ae\'b4\'c2 \'c0\'ce\'c5\'cd\'c6\'e4\'c0\'cc\'bd\'ba\'b8\'a6 \'c5\'eb\'c7\'d8 \'b1\'b8\'c7\'f6 \'b5\'c8\'b0\'cd\'c3\'b3\'b7\'b3, \'c1\'b6\'c7\'d5\'c0\'bb \'c5\'eb\'c7\'d8 \'b0\'d4\'c0\'d3\'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae\'b8\'a6 \'bd\'b1\'b0\'d4 \'b1\'b8\'bc\'ba\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9\'b4\'c2 \'b3\'bb\'bf\'eb\'c0\'bb \'bc\'b3\'b8\'ed\'c7\'cf\'b4\'c2 \'ba\'ce\'ba\'d0\'bf\'a1\'bc\'ad\'b4\'c2 \'b0\'c5\'c0\'c7 oop\'bf\'cd \'b5\'bf\'c0\'cf\'c7\'d1 \'b3\'bb\'bf\'eb\'c0\'bb \'b4\'d9\'b7\'e7\'b0\'ed \'c0\'d6\'b4\'c2 \'b0\'cd\'c3\'b3\'b7\'b3 \'ba\'b8\'c0\'ce\'b4\'d9.\
-\
-\'b4\'f5\'ba\'d2\'be\'ee, \'b0\'a2 \'c4\'c4\'c6\'f7\'b3\'cd\'c6\'ae\'b5\'e9\'c0\'ba \'b4\'d9\'b8\'a5 \'c4\'c4\'c6\'f7\'b3\'cd\'c6\'ae\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'b0\'fc\'bd\'c9\'c0\'cc \'be\'f8\'b4\'d9\'b0\'ed \'bc\'b3\'b8\'ed\'c7\'cf\'b4\'c2 \'ba\'ce\'ba\'d0\'bf\'a1\'bc\'ad\'b4\'c2 \'bf\'aa\'bd\'c3 OOP\'bf\'a1\'bc\'ad \'a1\'ae\'b5\'b6\'b8\'b3\'c0\'fb/\'c0\'da\'c0\'b2\'c0\'fb\'a1\'af\'c0\'b8\'b7\'ce \'b1\'e2\'b4\'c9\'c0\'bb \'b1\'b8\'bc\'ba\'c7\'d2 \'b0\'cd\'c0\'bb \'bf\'e4\'b1\'b8\'c7\'cf\'b4\'c2\'b0\'cd\'b0\'fa \'b0\'b0\'c0\'ba \'c0\'c7\'b9\'cc\'b7\'ce \'ba\'b8\'c0\'ce\'b4\'d9.\
-\
-\'b4\'d9\'b8\'b8, broadcasting\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad\'b4\'c2 \'be\'c6\'c1\'f7 \'be\'ee\'b6\'b2 \'c6\'d0\'c5\'cf\'c0\'ce\'c1\'f6\'b4\'c2 \'b8\'f0\'b8\'a3\'b0\'da\'c0\'b8\'b3\'aa, \'b8\'f0\'b5\'e7 \'b0\'d4\'c0\'d3\'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae\'bf\'a1 \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c0\'fc\'b4\'de\'c7\'d1\'b4\'d9\'b4\'c2 \'b0\'cd\'c0\'bb\'b7\'ce \'ba\'c3\'c0\'bb\'b6\'a7, \'c0\'fa\'b7\'c5\'c7\'d1 \'ba\'f1\'bf\'eb\'c0\'b8\'b7\'ce \'c3\'b3\'b8\'ae\'c7\'d2\'bc\'f6 \'c0\'d6\'b4\'c2\'b0\'cd\'c0\'ba \'be\'c6\'b4\'d2\'bc\'f6 \'c0\'d6\'b0\'da\'b4\'d9\'b0\'ed \'bb\'fd\'b0\'a2\'b5\'c8\'b4\'d9. (streaming\'c0\'cc \'c0\'cc\'bf\'cd \'c0\'af\'bb\'e7\'c7\'cf\'c1\'f6 \'be\'ca\'c0\'bb\'b1\'ee.. \'c3\'df\'c3\'f8\'c7\'cf\'c1\'f6\'b8\'b8, \'be\'c6\'c1\'f7 streaming\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'bf\'c3\'b9\'d9\'b7\'ce \'be\'cb\'c1\'f6 \'b8\'f8\'c7\'cf\'b9\'c7\'b7\'ce \'bc\'d3\'b4\'dc\'c7\'d2\'bc\'f6 \'be\'f8\'b4\'d9)\
-\'c0\'cc\'b7\'b1 \'b9\'e6\'bd\'c4\'c0\'bb \'bc\'d2\'b0\'b3\'b8\'b8 \'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'ce\'c1\'f6, \'b1\'c7\'c0\'e5\'c7\'cf\'b4\'c2\'b0\'cd\'c0\'ce\'c1\'f6\'b4\'c2 \'be\'d5\'c0\'b8\'b7\'ce\'c0\'c7 \'b3\'bb\'bf\'eb\'c0\'bb \'b4\'f5 \'bb\'ec\'c6\'ec\'ba\'b8\'b8\'e9\'bc\'ad \'c6\'c4\'be\'c7\'c7\'d8\'be\'df \'c7\'d2 \'ba\'ce\'ba\'d0\'c0\'cc\'b6\'f3 \'bb\'fd\'b0\'a2\'b5\'c8\'b4\'d9.\
-\
-\'c3\'b3\'c0\'bd\'ba\'ce\'c5\'cd OOP\'c0\'c7 \'b0\'b3\'b3\'e4\'c0\'bb \'c0\'cf\'ba\'ce \'bc\'d2\'b0\'b3\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'b8\'b7\'ce \'ba\'c1\'bc\'ad\'b4\'c2, \'be\'d5\'c0\'b8\'b7\'ce \'be\'ee\'b6\'b2\'bd\'c4\'c0\'b8\'b7\'ce \'b3\'bb\'bf\'eb\'c0\'bb \'b2\'f8\'b0\'ed\'b0\'a5\'c1\'f6 \'b3\'bb\'bd\'c9 \'b1\'e2\'b4\'eb\'b5\'c8\'b4\'d9 :)\
-\
-\'c3\'df\'b0\'a1\'b7\'ce\'a1\'a6 orc -> orc fighter -> orc chief \'b0\'b0\'c0\'ba \'b9\'e6\'bd\'c4\'c0\'b8\'b7\'ce \'bc\'b3\'b8\'ed\'c7\'df\'c0\'bb\'b6\'a7, \'c0\'cc\'b7\'b1 \'b8\'f0\'bd\'c0\'bf\'a1\'bc\'ad\'b4\'c2 \'bb\'f3\'bc\'d3\'c0\'cc \'b8\'c5\'bf\'ec \'c7\'d5\'b8\'ae\'c0\'fb\'c0\'ce \'b9\'e6\'b9\'fd\'c0\'cf \'b0\'cd\'c0\'cc\'b6\'f3\'b4\'c2 \'bb\'fd\'b0\'a2\'c0\'cc \'b5\'e9\'b1\'e2\'b5\'b5 \'c7\'df\'b0\'ed, oop\'bf\'a1\'bc\'ad\'b4\'c2 \'bb\'f3\'bc\'d3\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'cf\'c1\'f6 \'be\'ca\'c0\'bb\'b0\'cd\'c0\'bb \'b1\'c7\'c0\'e5\'c7\'cf\'b4\'c2\'b0\'cd\'c0\'b8\'b7\'ce \'be\'cb\'b0\'ed \'c0\'d6\'c1\'f6\'b8\'b8..\
-interface\'b7\'ce \'b8\'b8\'b5\'e9\'be\'ee\'c1\'f8 orc\'b8\'a6 orc fighter\'b0\'a1 \'bb\'f3\'bc\'d3 \'b9\'de\'b4\'c2 \'c7\'e0\'c0\'a7\'b4\'c2, interface\'b8\'a6 \'bb\'f3\'bc\'d3\'b9\'de\'b4\'c2 \'b0\'cd\'c0\'cc\'b9\'c7\'b7\'ce\'a1\'a6\
-\'c1\'df\'ba\'b9 \'b1\'b8\'c7\'f6\'bf\'a1 \'b4\'eb\'c7\'d1 \'ba\'ce\'b4\'e3\'c0\'bb \'b4\'fa\'be\'ee\'c1\'d6\'b4\'c2 \'b0\'cd\'c0\'cc \'b5\'c7\'be\'ee(orc fighter\'b4\'c2 orc\'c0\'c7 \'b8\'f0\'b5\'e7 \'bc\'d3\'bc\'ba\'c0\'bb \'b5\'bf\'c0\'cf\'c7\'d1 \'b1\'b8\'c7\'f6 \'b9\'e6\'bd\'c4\'c0\'b8\'b7\'ce \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'b4\'d9\'b4\'c2 \'c0\'fc\'c1\'a6 \'c7\'cf\'bf\'a1\'bc\'ad\'c0\'cc\'b8\'e7, \'c3\'df\'b0\'a1 \'b1\'e2\'b4\'c9\'c0\'cc \'c7\'ca\'bf\'e4\'c7\'cf\'b4\'d9\'b8\'e9 base.Method()\'b8\'a6 \'c5\'eb\'c7\'d1 \'c1\'a2\'b1\'d9\'b5\'b5 \'b0\'a1\'b4\'c9\'c7\'cf\'b9\'c7\'b7\'ce) \'b9\'ab\'c1\'b6\'b0\'c7\'c0\'fb \'b9\'e8\'c3\'b4\'c0\'cc \'bf\'c7\'c0\'ba\'b0\'cd\'c0\'ce\'b0\'a1? \'b6\'f3\'b4\'c2 \'bb\'fd\'b0\'a2\'b5\'b5 \'c7\'cf\'b0\'d4\'b5\'c8\'b4\'d9.\
-oop\'bf\'a1\'bc\'ad \'bb\'f3\'bc\'d3\'c0\'bb \'b1\'c7\'c0\'e5\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2 \'c0\'cc\'c0\'af\'b4\'c2, \'ba\'d2\'c7\'ca\'bf\'e4\'c7\'d1 \'b1\'e2\'b4\'c9\'b1\'ee\'c1\'f6 \'bb\'f3\'bc\'d3\'b9\'de\'b0\'d4 \'b5\'c7\'be\'ee \'b0\'b4\'c3\'bc\'b0\'a1 \'bf\'dc\'ba\'ce\'bf\'cd \'c7\'f9\'b7\'c2\'c7\'cf\'b4\'c2 \'b9\'e6\'bd\'c4\'c0\'cc \'c0\'df\'b8\'f8\'b5\'c7\'b0\'c5\'b3\'aa, \'ba\'d2\'c7\'ca\'bf\'e4\'c7\'d1 \'b8\'de\'bd\'c3\'c1\'f6 \'c0\'ce\'c5\'cd\'c6\'e4\'c0\'cc\'bd\'ba\'b8\'a6 \'bf\'dc\'ba\'ce\'bf\'a1 \'b3\'eb\'c3\'e2\'c7\'cf\'b0\'d4 \'b5\'c7\'be\'ee, \'c0\'cc \'b0\'b4\'c3\'bc\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b4\'d9\'b8\'a5 \'b0\'b4\'c3\'bc\'bf\'a1\'b0\'d4 \'b1\'e2\'b4\'c9\'c0\'fb\'c0\'b8\'b7\'ce \'bf\'c0\'c7\'d8\'b8\'a6 \'be\'df\'b1\'e2\'bd\'c3\'c5\'b3\'bc\'f6 \'c0\'d6\'b1\'e2 \'b6\'a7\'b9\'ae\'c0\'cc \'be\'c6\'b4\'d2\'b1\'ee.. \'bb\'fd\'b0\'a2\'b5\'c8\'b4\'d9.\
-}
+
+---
+#과제 2 
+##3장에서 논의하고 싶은 부분 1개 이상 작성하고 서로 얘기하고 이해하는 시간
+---
+
+컴포넌트 패턴에서 말하는 기능의 조립은, OOP에서 말하는 ‘책임’와 ‘협력’과 동일해보인다.
+
+이들 컴포넌트는 인터페이스를 통해 구현 된것처럼, 조합을 통해 게임오브젝트를 쉽게 구성할 수 있다는 내용을 설명하는 부분에서는 거의 oop와 동일한 내용을 다루고 있는 것처럼 보인다.
+
+더불어, 각 컴포넌트들은 다른 컴포넌트에 대해서 관심이 없다고 설명하는 부분에서는 역시 OOP에서 ‘독립적/자율적’으로 기능을 구성할 것을 요구하는것과 같은 의미로 보인다.
+
+다만, broadcasting에 대해서는 아직 어떤 패턴인지는 모르겠으나, 모든 게임오브젝트에 메시지를 전달한다는 것을로 봤을때, 저렴한 비용으로 처리할수 있는것은 아닐수 있겠다고 생각된다. (streaming이 이와 유사하지 않을까.. 추측하지만, 아직 streaming에 대해서 올바로 알지 못하므로 속단할수 없다)
+이런 방식을 소개만 하는 것인지, 권장하는것인지는 앞으로의 내용을 더 살펴보면서 파악해야 할 부분이라 생각된다.
+
+처음부터 OOP의 개념을 일부 소개하는 것으로 봐서는, 앞으로 어떤식으로 내용을 끌고갈지 내심 기대된다 :)
+
+추가로… orc -> orc fighter -> orc chief 같은 방식으로 설명했을때, 이런 모습에서는 상속이 매우 합리적인 방법일 것이라는 생각이 들기도 했고, oop에서는 상속을 사용하지 않을것을 권장하는것으로 알고 있지만..
+interface로 만들어진 orc를 orc fighter가 상속 받는 행위는, interface를 상속받는 것이므로…
+중복 구현에 대한 부담을 덜어주는 것이 되어(orc fighter는 orc의 모든 속성을 동일한 구현 방식으로 가지고 있다는 전제 하에서이며, 추가 기능이 필요하다면 base.Method()를 통한 접근도 가능하므로) 무조건적 배척이 옳은것인가? 라는 생각도 하게된다.
+oop에서 상속을 권장하지 않는 이유는, 불필요한 기능까지 상속받게 되어 객체가 외부와 협력하는 방식이 잘못되거나, 불필요한 메시지 인터페이스를 외부에 노출하게 되어, 이 객체를 사용하는 다른 객체에게 기능적으로 오해를 야기시킬수 있기 때문이 아닐까.. 생각된다.
