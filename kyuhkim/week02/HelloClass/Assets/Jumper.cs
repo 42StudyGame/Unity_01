@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class Jumper : MonoBehaviour
 {
-    public Rigidbody myRigidbody;
+    private Rigidbody _rigidbody;
     
-    void Start()
+    private void Start()
     {
-        myRigidbody = GetComponent<Rigidbody>();
-        myRigidbody.AddForce(0, 500, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.AddForce(0, 500, 0);
     }
 }
