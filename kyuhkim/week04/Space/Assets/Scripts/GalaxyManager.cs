@@ -10,46 +10,26 @@ public class GalaxyManager : MonoBehaviour
 
     private Camera _mainCamera;
 
-    private async void Start()
+    private void Start()
     {
         _mainCamera = Camera.main;
-        
-        await WaitUntilDeactivate(sun.GetComponent<IPlanet>());
-        await WaitUntilDeactivate(earth.GetComponent<IPlanet>());
-        await WaitUntilDeactivate(moon.GetComponent<IPlanet>());
-        
         Init();
     }
-    
-    private static async Task WaitUntilDeactivate(IActivate target)
-    {
-        await Task.Run(() =>
-        {
-            while (target.Activate)
-            {
-                Task.Delay(30);
-            }
-        });
-    }
 
-    private void Init()
+    private async void Init()
     {
         SetPlanet(sun.GetComponent<IPlanet>(), 0, PlanetInfo.Speed * .2f, null, 0, 0);
         SetPlanet(earth.GetComponent<IPlanet>(), PlanetInfo.EarthAxis, PlanetInfo.Speed * 10, sun, 50, 10);
-        SetPlanet(moon.GetComponent<IPlanet>(), PlanetInfo.MoonAxis, PlanetInfo.Speed, earth, 3, 100);
+        SetPlanet(moon.GetComponent<IPlanet>(), PlanetInfo.MoonAxis, PlanetInfo.Speed * 10, earth, 2, 1000);
     }
 
-    private static void SetPlanet(IPlanet planet, float axis, float speed, GameObject orbitPoint, float distance, float angularVelocity)
+    private static void SetPlanet(IPlanet planet, float axis, float speed, GameObject orbit, float distance, float angularVelocity)
     {
-        planet.RotateAxis(axis);
-        planet.RotateSpeed(speed);
-        
-        planet.OrbitPoint = orbitPoint;
-        planet.OrbitDistance(distance);
-        planet.OrbitAngularVelocity(angularVelocity);
+        planet.SetRotate(Vector3.forward * axis, speed);
+        planet.SetOrbit(orbit, distance, angularVelocity);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _mainCamera.transform.LookAt(earth.transform.position, Vector3.up);
     }
