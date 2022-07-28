@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public AudioClip deathClip;
-    public float jumpForce = 700f;
+    private float _jumpForce = 400f;
 
     private int _jumpCount = 0;
     private bool _isGround = false;
@@ -21,7 +18,14 @@ public class PlayerController : MonoBehaviour
     private const string k_die = "Die";
     private const string t_dead = "Dead";
 
+    private IGameManager _gameManager;
+
     private void Awake()
+    {
+        _gameManager = FindObjectOfType<GameManager>();
+    }
+    
+    private void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -39,13 +43,13 @@ public class PlayerController : MonoBehaviour
         {
             ++_jumpCount;
             _playerRigidbody.velocity = Vector2.zero;
-            _playerRigidbody.AddForce(Vector2.up * jumpForce);
+            _playerRigidbody.AddForce(Vector2.up * _jumpForce);
             _playerAudio.Play();
         }
-        else if (Input.GetMouseButtonUp(0) && _playerRigidbody.velocity.y > 0)
-        {
-            _playerRigidbody.velocity *= .5f;
-        }
+        // else if (Input.GetMouseButtonUp(0) && _playerRigidbody.velocity.y > 0)
+        // {
+        //     _playerRigidbody.velocity *= .5f;
+        // }
         
         _animator.SetBool(k_grounded, _isGround);
     }
@@ -58,14 +62,20 @@ public class PlayerController : MonoBehaviour
 
         _playerRigidbody.velocity = Vector2.zero;
         _isDead = true;
+        
+        _gameManager.OnPlayerDead();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(t_dead) && !_isDead)
+        if (other.TryGetComponent(out IKiller _) && !_isDead)
         {
             Die();
         }
+        // if (other.CompareTag(t_dead) && !_isDead)
+        // {
+        //     Die();
+        // }
     }
     
     private void OnCollisionEnter2D(Collision2D col)

@@ -28,9 +28,19 @@ collision, collider
 
 
 ## 12장
+singleton 등장!
+interface로 구조 변경해봄.
+- 인터페이스 이름이 좀...
+- singleton을 혐오하지는 않음. 다만, oop학습중이니...
 
-
+의문
+- FindObjectOfType<T> 이걸로 찾는게 맞나...;;;
+- 이게 만약... 유니티가 아니라 그냥 c#에서 텍스트로만 하는 게임이었다면.. 어떻게 했어야 했을까?
 
 
 ## 13장
-
+objectPool 등장!
+spawner를 저렇게 써도 되긴 하.. (지만, 저렇게 쓰고싶진 않다;;;)
+- tag(dead)를 Killer라는 interface로 바꾸고, TryGetComponent형식으로 체크하게 변경해봄
+- 별 의미는 없지만 (TryGetComponent만큼 성능은 나빠지겠지만;;;) tag라는 것이, 이름만 있는 빈 interface를 달아놓고, 그게 있나? 확인하는 것만으로도 같은 작업?을 하는 것으로 보여서 해봤더니 되긴 하더라..
+- 이러면... 런게임의 레벨 디자인이 안된건디;;; (뒷사람이 하겠지?)
