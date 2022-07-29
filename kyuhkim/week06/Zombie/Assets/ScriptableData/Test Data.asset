@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691c6a4cf1066804f93754bce60a9498, type: 3}
   m_Name: Test Data
   m_EditorClassIdentifier: 
-  life: 10
+  life: 3
