@@ -222,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207a0d2a14fd6445eac41a59cc86b7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
 --- !u!61 &567597763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -671,11 +670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 1136364580622007556, guid: 90a00ea92257a4e6c93be89a997e5467, type: 3}
-  count: 3
-  timeBetSpawnMin: 1.25
-  timeBetSpawnMax: 2.25
-  yMin: -3.5
-  yMax: 1.5
 --- !u!4 &974257677
 Transform:
   m_ObjectHideFlags: 0
@@ -905,7 +899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207a0d2a14fd6445eac41a59cc86b7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
 --- !u!61 &1532459942
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1041,7 +1034,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 50, y: 2}
+  m_Size: {x: 500, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &1539973442
 Transform:
@@ -1460,7 +1453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathClip: {fileID: 8300000, guid: 668a107660fa54fe98e03b698a09aa49, type: 3}
-  jumpForce: 700
 --- !u!1 &1996869161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,4 +1759,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207a0d2a14fd6445eac41a59cc86b7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10

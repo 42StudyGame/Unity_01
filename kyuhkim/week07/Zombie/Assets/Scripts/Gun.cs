@@ -8,16 +8,21 @@ public partial class Gun : IWeapon
 {
     public void Fire()
     {
-        if (State.Ready.Equals(state) && Time.time >= _lastFireTime + gunData.timeBetFire)
+        if (!State.Ready.Equals(state) 
+            || !(Time.time >= _lastFireTime + gunData.timeBetFire))
         {
-            _lastFireTime = Time.time;
-            Shot();
+            return;
         }
+        
+        _lastFireTime = Time.time;
+        Shot();
     }
 
     public bool Reload()
     {
-        if (State.Reloading.Equals(state) || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
+        if (State.Reloading.Equals(state) 
+            || ammoRemain <= 0 
+            || magAmmo >= gunData.magCapacity)
         {
             return false;
         }
@@ -48,8 +53,8 @@ public partial class Gun : MonoBehaviour
         Empty,
         Reloading
     }
-    
-    public State state { get; private set; }
+
+    private State state { get; set; }
     public Transform fireTransform;
     public ParticleSystem muzzleFlashEffect;
     public ParticleSystem shellEjectEffect;

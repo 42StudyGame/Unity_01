@@ -8,13 +8,26 @@
 ---
 6부 좀비 서바이서 완성 프로젝트를 github에 올리고 실행 영상 올리기
 
+
 ---
 # 노트
 ---
+AI Navigation이라는 재미있는 기능이 있다.
+이동 타입을 설정하고(이번에는 휴머노이트) 크기와 이동 경사각 단차, 등등을 설정해주고 구워주면 만들어진 navi mesh를 이용해서 움직여준다. (신기방기)
+
 
 ---
 # 삽질
 ---
+AI Navigation은 실험작이다. [Package manager]에 [Add package by name]을 선택한뒤 [com.unity.ai.navigation]를 입력해주어야 한다.
+기즈모를 꺼놓고, naviMesh가 왜 안보일까.. 고민했다...
+
+오타: page 737: pathMeshAgent => navMeshAgent
+
+Fps view를 추가했더니, 개걸음이 없는게 아쉽더라...
+SideStep으로 추가함
+그랬더니 Move가 마음에 안들어서, StraightStep으로 변경
+구조가 좋아서? 그런지, 추가하는건 어렵지 않았음.
 
 ---
 # 감상
