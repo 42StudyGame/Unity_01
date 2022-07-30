@@ -80,6 +80,11 @@ public class Zombie : LivingEntity
 
                 foreach (var target in _livingTargetArray)
                 {
+                    if (target == null)
+                    {
+                        break;
+                    }
+                    
                     if (!target.TryGetComponent(out LivingEntity living))
                     {
                         continue;
@@ -96,7 +101,7 @@ public class Zombie : LivingEntity
 
     private void Update()
     {
-        _zombieAnimator.SetBool("HasTatget", HasTarget);
+        _zombieAnimator.SetBool("HasTarget", HasTarget);
     }
 
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
@@ -141,9 +146,10 @@ public class Zombie : LivingEntity
             return;
         }
 
-        _lastAttackTime = Time.time;
         target.OnDamage(_damage,
             other.ClosestPoint(transform.position), 
             transform.position - other.transform.position);
+        _lastAttackTime = Time.time;
+        _targetEntity = null;
     }
 }

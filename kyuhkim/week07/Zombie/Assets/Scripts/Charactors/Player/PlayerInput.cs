@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public partial class PlayerInput : IInput
@@ -19,9 +20,11 @@ public partial class PlayerInput : MonoBehaviour
     private const string _fireButtonName = "Fire1";
     private const string _reloadButtonName = "Reload";
     private IGameManager _gameMamager = null;
+    // private Vector3 _mousePrevious;
     
     private void Awake()
     {
+        // _mousePrevious = Input.mousePosition;
         _gameMamager = FindObjectOfType<GameManager>();
     }
     
@@ -33,12 +36,15 @@ public partial class PlayerInput : MonoBehaviour
             InitializePlayer();
             return;
         }
-
+        
         StraightStep = Input.GetAxis(_moveAxisName);
         Rotate = Input.GetAxis(_rotateAxisName);
+        // Rotate = (Input.mousePosition - _mousePrevious).x * .5f;
         SideStep = Input.GetAxis(_slideAxisName);
         Fire = Input.GetButton(_fireButtonName);
         Reload = Input.GetButtonDown(_reloadButtonName);
+
+        // _mousePrevious = Input.mousePosition;
     }
     
     private void InitializePlayer()

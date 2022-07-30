@@ -24,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Rotate();
         Move();
-        // Slide();
         
-        _playerAnimator.SetFloat("Move", Mathf.Abs(_playerInput.StraightStep) + Mathf.Abs(_playerInput.SideStep));
+        _playerAnimator.SetFloat("Move",
+            Mathf.Abs(_playerInput.StraightStep) + Mathf.Abs(_playerInput.SideStep));
     }
 
     private void Rotate()
@@ -41,11 +41,5 @@ public class PlayerMovement : MonoBehaviour
         moveDistance += transform.right * (_playerInput.SideStep * _movceSpeed * Time.deltaTime);
         _playerRigidbody.MovePosition(_playerRigidbody.position + moveDistance);
     }
-
-    // private void Slide()
-    // {
-    //     var moveDistance = transform.right * (_playerInput.Slide * _movceSpeed * Time.deltaTime);
-    //     _playerRigidbody.MovePosition(_playerRigidbody.position + moveDistance);
-    // }
 }
 

@@ -23,7 +23,7 @@ public interface IWeapon
 {
     public void Fire();
     public bool Reload();
-    public int RefillableCount { get; }
+    public int RefillableCount { get; set; }
     public int ChargedCount { get; }
 }
 
@@ -58,5 +58,6 @@ public interface IShooter
 public interface IGameManager
 {
     public bool IsGameover { get; }
+    public void AddScore(int score);
 }
 

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a149ca056bb514832a35cf87c85aa666, type: 3}
-  m_Name: Zombie Data
+  m_Name: Zombie Fast
   m_EditorClassIdentifier: 
-  health: 0
-  damage: 0
-  speed: 0
-  skilColor: {r: 0, g: 0, b: 0, a: 0}
+  health: 50
+  damage: 10
+  speed: 4
+  skilColor: {r: 1, g: 0, b: 0, a: 1}

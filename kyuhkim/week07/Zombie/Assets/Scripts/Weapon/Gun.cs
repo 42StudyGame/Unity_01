@@ -35,7 +35,7 @@ public partial class Gun : IWeapon
     public int RefillableCount
     {
         get => ammoRemain;
-        private set => ammoRemain = value;
+        set => ammoRemain = value;
     }
 
     public int ChargedCount
