@@ -46,7 +46,11 @@ public class ItemSpawner : MonoBehaviourPun
     private IEnumerator DestoryAfter(GameObject item, float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        PhotonNetwork.Destroy(item);
+        
+        if (item != null)
+        {
+            PhotonNetwork.Destroy(item);
+        }
     }
 
     private static Vector3 GetRandomPointOnNavMesh(Vector3 center, float distance)
