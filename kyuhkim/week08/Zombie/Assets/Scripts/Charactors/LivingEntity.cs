@@ -11,7 +11,7 @@ public partial class LivingEntity : ILiving
         {
             Health -= damage;
             photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Health, IsDead);
-            photonView.RPC("OnDamage", RpcTarget.Others, hitPoint, hitNormal);
+            photonView.RPC("OnDamage", RpcTarget.Others, damage, hitPoint, hitNormal);
         }
 
         if (Health <= 0 && !IsDead)
