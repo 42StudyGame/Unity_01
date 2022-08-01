@@ -5,26 +5,31 @@ using UnityEngine.UI;
 
 public class PlayerHealth : LivingEntity
 {
-    [SerializeField] private Slider _healthSlider;
-    [SerializeField] private AudioClip _deathClip;
-    [SerializeField] private AudioClip _hitClip;
-    [SerializeField] private AudioClip _itemPickupClip;
-
-    private AudioSource _playerAudioPlayer;
-    private Animator _playerAnimator;
-
-    private PlayerMovement _playerMovement;
-    private PlayerShooter _playerShooter;
-
+    [SerializeField] private Slider _healthSlider = null;
+    [SerializeField] private AudioClip _deathClip = null;
+    [SerializeField] private AudioClip _hitClip = null;
+    [SerializeField] private AudioClip _itemPickupClip = null;
+    private GameManager _gameManager = null;
+    
+    private const int DeathPenalty = -200;
+    
+    private AudioSource _playerAudioPlayer = null;
+    private Animator _playerAnimator = null;
+    
+    private PlayerMovement _playerMovement = null;
+    private PlayerShooter _playerShooter = null;
+    
     private void Awake()
     {
+        _gameManager = FindObjectOfType<GameManager>();
+        
         _playerAnimator = GetComponent<Animator>();
         _playerAudioPlayer = GetComponent<AudioSource>();
 
         _playerMovement = GetComponent<PlayerMovement>();
         _playerShooter = GetComponent<PlayerShooter>();
     }
-
+    
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -36,14 +41,14 @@ public class PlayerHealth : LivingEntity
         _playerMovement.enabled = true;
         _playerShooter.enabled = true;
     }
-
+    
     [PunRPC]
     public override void Restore(float changeAmount)
     {
         base.Restore(changeAmount);
         _healthSlider.value = Health;
     }
-
+    
     [PunRPC]
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
@@ -60,6 +65,8 @@ public class PlayerHealth : LivingEntity
     protected override void Die()
     {
         base.Die();
+        
+        _gameManager.AddScore(DeathPenalty);
         
         _healthSlider.gameObject.SetActive(false);
         _playerAudioPlayer.PlayOneShot(_deathClip);

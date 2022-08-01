@@ -28,6 +28,11 @@ public partial class GameManager : IGameManager
         {
             return;
         }
+
+        if (score < 0)
+        {
+            score *= 10;
+        }
         
         _score += score;
         _uiManager.UpdateScoreText(_score);
