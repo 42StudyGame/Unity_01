@@ -35,7 +35,7 @@ public partial class LivingEntity : ILiving
         
         Health += changeAmount;
         photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Health, IsDead);
-        photonView.RPC("Restore", RpcTarget.Others, changeAmount, IsDead);
+        photonView.RPC("Restore", RpcTarget.Others, changeAmount);
     }
 
     public bool IsDead { get; protected set; }

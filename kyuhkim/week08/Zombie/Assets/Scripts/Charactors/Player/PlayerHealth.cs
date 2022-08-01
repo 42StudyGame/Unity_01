@@ -57,17 +57,6 @@ public class PlayerHealth : LivingEntity
         _healthSlider.value = Health;
     }
 
-    // RPC method 'OnDamage' found on object with PhotonView 1001 but has wrong parameters. Implement as 'OnDamage(Vector3, Vector3)'. PhotonMessageInfo is optional as final parameter.Return type must be void or IEnumerator (if you enable RunRpcCoroutines).
-    // UnityEngine.Debug:LogErrorFormat (UnityEngine.Object,string,object[])
-    // Photon.Pun.PhotonNetwork:ExecuteRpc (ExitGames.Client.Photon.Hashtable,Photon.Realtime.Player) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:646)
-    // Photon.Pun.PhotonNetwork:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:2201)
-    // Photon.Realtime.LoadBalancingClient:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonRealtime/Code/LoadBalancingClient.cs:3353)
-    // ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback (ExitGames.Client.Photon.StreamBuffer) (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PeerBase.cs:899)
-    // ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/EnetPeer.cs:565)
-    // ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PhotonPeer.cs:1771)
-    // Photon.Pun.PhotonHandler:Dispatch () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:222)
-    // Photon.Pun.PhotonHandler:FixedUpdate () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:145)
-    
     protected override void Die()
     {
         base.Die();
@@ -112,3 +101,25 @@ public class PlayerHealth : LivingEntity
         }
     }
 }
+
+    // RPC method 'OnDamage' found on object with PhotonView 1001 but has wrong parameters. Implement as 'OnDamage(Vector3, Vector3)'. PhotonMessageInfo is optional as final parameter.Return type must be void or IEnumerator (if you enable RunRpcCoroutines).
+    // UnityEngine.Debug:LogErrorFormat (UnityEngine.Object,string,object[])
+    // Photon.Pun.PhotonNetwork:ExecuteRpc (ExitGames.Client.Photon.Hashtable,Photon.Realtime.Player) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:646)
+    // Photon.Pun.PhotonNetwork:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:2201)
+    // Photon.Realtime.LoadBalancingClient:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonRealtime/Code/LoadBalancingClient.cs:3353)
+    // ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback (ExitGames.Client.Photon.StreamBuffer) (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PeerBase.cs:899)
+    // ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/EnetPeer.cs:565)
+    // ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PhotonPeer.cs:1771)
+    // Photon.Pun.PhotonHandler:Dispatch () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:222)
+    // Photon.Pun.PhotonHandler:FixedUpdate () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:145)
+    
+    // RPC method 'Restore' found on object with PhotonView 2001 but has wrong parameters. Implement as 'Restore(Single, Boolean)'. PhotonMessageInfo is optional as final parameter.Return type must be void or IEnumerator (if you enable RunRpcCoroutines).
+    // UnityEngine.Debug:LogErrorFormat (UnityEngine.Object,string,object[])
+    // Photon.Pun.PhotonNetwork:ExecuteRpc (ExitGames.Client.Photon.Hashtable,Photon.Realtime.Player) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:646)
+    // Photon.Pun.PhotonNetwork:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:2201)
+    // Photon.Realtime.LoadBalancingClient:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonRealtime/Code/LoadBalancingClient.cs:3353)
+    // ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback (ExitGames.Client.Photon.StreamBuffer) (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PeerBase.cs:899)
+    // ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/EnetPeer.cs:565)
+    // ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PhotonPeer.cs:1771)
+    // Photon.Pun.PhotonHandler:Dispatch () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:222)
+    // Photon.Pun.PhotonHandler:FixedUpdate () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:145)
