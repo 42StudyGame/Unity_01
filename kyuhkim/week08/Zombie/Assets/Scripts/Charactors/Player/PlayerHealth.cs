@@ -94,11 +94,11 @@ public class PlayerHealth : LivingEntity
             position.y = 0;
 
             transform.position = position;
-
-            // OnEnable()를 바로 호출하는 방법도 있겠지만, 누락시킨 사이클이 생길수 있으므로, 아래 방법을 그대로 사용하는편이 좋을듯.
-            gameObject.SetActive(false);
-            gameObject.SetActive(true);
         }
+        
+        // OnEnable()를 바로 호출하는 방법도 있겠지만, 누락시킨 사이클이 생길수 있으므로, 아래 방법을 그대로 사용하는편이 좋을듯.
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 }
 
