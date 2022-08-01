@@ -42,7 +42,6 @@ public partial class PlayerInput : MonoBehaviourPun
         
         StraightStep = Input.GetAxis(_moveAxisName);
         Rotate = Input.GetAxis(_rotateAxisName);
-        // Rotate = (Input.mousePosition - _mousePrevious).x * .5f;
         SideStep = Input.GetAxis(_slideAxisName);
         Fire = Input.GetButton(_fireButtonName);
         Reload = Input.GetButtonDown(_reloadButtonName);

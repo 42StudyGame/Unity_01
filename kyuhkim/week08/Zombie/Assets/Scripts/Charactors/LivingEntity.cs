@@ -34,6 +34,7 @@ public partial class LivingEntity : ILiving
         }
         
         Health += changeAmount;
+        Health = Mathf.Min(Health, startingHealth);
         photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Health, IsDead);
         photonView.RPC("Restore", RpcTarget.Others, changeAmount);
     }
