@@ -42,7 +42,7 @@ public interface ILiving : IDamageable
     public float Health { get; }
     public bool IsDead { get; }
     public void Restore(float changeAmount);
-    public event Action OnDeath;
+    // public event Action OnDeath;
 }
 
 public interface IInput : IMove, IAction
