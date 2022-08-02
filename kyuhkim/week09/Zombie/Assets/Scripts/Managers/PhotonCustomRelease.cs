@@ -21,7 +21,7 @@ public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
         
         var raiseEventOptions = new RaiseEventOptions
         {
-            CachingOption = EventCaching.AddToRoomCache,
+            CachingOption = EventCaching.RemoveFromRoomCache,
             Receivers = ReceiverGroup.All
         };
         
