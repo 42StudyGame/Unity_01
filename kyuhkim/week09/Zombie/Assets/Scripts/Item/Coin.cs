@@ -27,6 +27,7 @@ public partial class Coin : IPhotonPoolItem
 
     public void Release()
     {
+        NetworkRelease();
         Home.Release(Viewid);
     }
 

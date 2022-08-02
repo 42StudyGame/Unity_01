@@ -22,23 +22,6 @@ public abstract partial class MonoBehaviourPunCustomRelease : IOnEventCallback
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }
-    //
-    // private void GuestSideRelease(EventData photonEvent)
-    // {
-    //     if (PhotonNetwork.IsMasterClient)
-    //     {
-    //         return;
-    //     }
-    //     
-    //     // var data = (object[])photonEvent.CustomData;
-    //     // var viewId = (int)data[0];
-    //     var viewId = (int)photonEvent.CustomData;
-    //
-    //     Debug.Log($"call GuestSideRelease {viewId}");        
-    //     // ReleaseItemByViewId(viewId);
-    //     // 어떻게하지;;;
-    // }
-
 }
 
 public abstract partial class MonoBehaviourPunCustomRelease : MonoBehaviourPun

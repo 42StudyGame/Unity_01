@@ -28,6 +28,7 @@ public partial class HealthPack : IPhotonPoolItem
     public void Release()
     {
         // Home.Release(gameObject);
+        NetworkRelease();
         Home.Release(Viewid);
     }
     

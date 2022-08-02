@@ -32,6 +32,7 @@ public partial class AmmoPack : IPhotonPoolItem
     public void Release()
     {
         // Home.Release(gameObject);
+        NetworkRelease();
         Home.Release(Viewid);
     }
     
