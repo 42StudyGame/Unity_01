@@ -12,7 +12,7 @@ public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
         _photonView = GetComponent<PhotonView>();
     }
 
-    protected void NetworkRelease()
+    public void NetworkRelease()
     {
 Debug.Log("call NetworkRelease");
         // var data = new object[]

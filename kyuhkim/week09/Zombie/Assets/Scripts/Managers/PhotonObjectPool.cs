@@ -56,6 +56,8 @@ Debug.LogWarning($"remain count = {_queue.Count}");
     public void Release(int key)
     {
         var value = _account[key];
+        
+        value.GetComponent<MonoBehaviourPunCustomRelease>().NetworkRelease();
         _account.Remove(key);
         _queue.Enqueue(value);
         value.gameObject.SetActive(false);
