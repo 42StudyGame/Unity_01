@@ -160,6 +160,7 @@ Debug.Log($"call GuestSideRelease {viewId}");
                 continue;
             }
             
+            container.Search(viewId).GetComponent<MonoBehaviourPunCustomRelease>().NetworkRelease();
             container.Release(viewId);
             break;
         }

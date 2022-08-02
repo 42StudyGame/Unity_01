@@ -79,7 +79,7 @@ public interface IPhotonObjectPool
     public Task SetPrefab(string path);
     public Task<PhotonView> Request();
     public void Release(int key);
-    public bool Search(int id);
+    public PhotonView Search(int id);
 }
 
 public class PhotonCustomEventCode

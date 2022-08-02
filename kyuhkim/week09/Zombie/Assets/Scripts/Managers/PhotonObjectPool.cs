@@ -64,9 +64,16 @@ Debug.LogWarning($"remain count = {_queue.Count}");
 Debug.Log($"Released count = {_queue.Count}");        
     }
 
-    public bool Search(int id)
+    public PhotonView Search(int id)
     {
-        return _account.ContainsKey(id);
+        try
+        {
+            return _account[id];
+        }
+        catch
+        {
+            throw new Exception($"{id} is not exist");
+        }
     }
 }
 
