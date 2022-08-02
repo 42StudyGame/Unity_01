@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Photon.Pun;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
-public partial class Coin : IItem
+public partial class Coin : IPoolItem
 {
     public void Use(GameObject target)
     {
@@ -14,11 +15,21 @@ public partial class Coin : IItem
         }
         
         _gameManager.AddScore(Score);
-        PhotonNetwork.Destroy(gameObject);
+        // make release event;
+        //PhotonNetwork.Destroy(gameObject);
+        NetworkRelease();
+        Release();
+    }
+
+    public IObjectPool Home { get; set; }
+    
+    public void Release()
+    {
+        Home.Release(gameObject);
     }
 }
 
-public partial class Coin : MonoBehaviour
+public partial class Coin : MonoBehaviourPunCustomRelease
 {
     private const int Score = 200;
     private GameManager _gameManager = null;

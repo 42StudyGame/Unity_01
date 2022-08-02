@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public interface IMove
 {
@@ -17,6 +18,12 @@ public interface IAction
 public interface IItem
 {
     public void Use(GameObject target);
+}
+
+public interface IPoolItem : IItem
+{
+    public IObjectPool Home { get; set; }
+    public void Release();
 }
 
 public interface IWeapon
@@ -61,3 +68,15 @@ public interface IGameManager
     public void AddScore(int score);
 }
 
+public interface IObjectPool
+{
+    public Task SetPrefab(string path);
+    public Task<GameObject> Request();
+    public void Release(GameObject target);
+}
+
+public class PhotonCustomEventCode
+{
+    public const byte Request = 1;
+    public const byte Release = 2;
+}

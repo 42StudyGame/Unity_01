@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public partial class HealthPack : IItem
+public partial class HealthPack : IPoolItem
 {
     public void Use(GameObject target)
     {
@@ -11,11 +11,21 @@ public partial class HealthPack : IItem
         }
         
         life.Restore(Health);
-        PhotonNetwork.Destroy(gameObject);
+        // make release event;
+        // PhotonNetwork.Destroy(gameObject);
+        NetworkRelease();
+        Release();
+    }
+
+    public IObjectPool Home { get; set; }
+    
+    public void Release()
+    {
+        Home.Release(gameObject);
     }
 }
 
-public partial class HealthPack : MonoBehaviourPun
+public partial class HealthPack : MonoBehaviourPunCustomRelease
 {
     private const int Health = 50;
 }

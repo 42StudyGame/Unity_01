@@ -1,23 +1,38 @@
+using System.Threading.Tasks;
 using System.Collections;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ItemSpawner : MonoBehaviourPun
+public partial class ItemSpawner : MonoBehaviourPun
 {
-    [SerializeField] private GameObject[] _itemArray;
-    // public Transform playerTransform;
+    private IObjectPool[] _itemPool;
+    [SerializeField] private GameObject[] itemArray;
     
-    private float _maxDistance = 5f;
-    private float _timeBetSpawnMax = 7f;
-    private float _timeBetSpawnMin = 2f;
+    private const float MaxDistance = 5f;
+    private const float TimeBetSpawnMax = 7f;
+    private const float TimeBetSpawnMin = 2f;
     private float _timeBetSpawn;
     private float _lastSpawnTime;
 
+    // private const byte CustomManualRequestEventCode = 1;
+    // private const byte CustomManualReleaseEventCode = 2;
+
     private void Start()
     {
-        _timeBetSpawn = Random.Range(_timeBetSpawnMin, _timeBetSpawnMax);
+        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
         _lastSpawnTime = 0;
+        _itemPool = new IObjectPool[3];
+        
+        _itemPool[0] = new ObjectPool();
+        _itemPool[1] = new ObjectPool();
+        _itemPool[2] = new ObjectPool();
+
+        _itemPool[0].SetPrefab("modelingData_ammo");
+        _itemPool[1].SetPrefab("modelingData_coin");
+        _itemPool[2].SetPrefab("modelingData_healthPack");
     }
 
     private void Update()
@@ -29,27 +44,76 @@ public class ItemSpawner : MonoBehaviourPun
         }
         
         _lastSpawnTime = Time.time;
-        _timeBetSpawn = Random.Range(_timeBetSpawnMin, _timeBetSpawnMax);
+        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
         Spawn();
     }
 
-    private void Spawn()
+    private async void Spawn()
     {
-        var position = GetRandomPointOnNavMesh(Vector3.zero, _maxDistance) + Vector3.up * .5f;
+        var position = GetRandomPointOnNavMesh(Vector3.zero, MaxDistance) + Vector3.up * .5f;
+        var poolId = Random.Range(0, _itemPool.Length);
+        var go = await _itemPool[poolId].Request();
+        var item = go.GetComponent<PhotonView>();
 
-        var selectItem = _itemArray[Random.Range(0, _itemArray.Length)];
-        var item = PhotonNetwork.Instantiate(selectItem.name, position, Quaternion.identity);
+        var data = new object[]
+        {
+            position,
+            item.ViewID,
+            poolId
+        };
 
-        StartCoroutine(DestoryAfter(item, 5f));
+        var raiseEventOptions = new RaiseEventOptions
+        {
+            Receivers = ReceiverGroup.Others,
+            CachingOption = EventCaching.AddToRoomCache
+        };
+
+        var sendOptions = new SendOptions()
+        {
+            Reliability = true
+        };
+
+        PhotonNetwork.RaiseEvent(PhotonCustomEventCode.Request, data, raiseEventOptions, sendOptions);
+        go.transform.position = position;
+        StartCoroutine(ReleaseAfter(go, 5f));
     }
 
-    private IEnumerator DestoryAfter(GameObject item, float delay)
+    public void OnEvent(EventData photonEvent)
+    {
+        switch (photonEvent.Code)
+        {
+            case PhotonCustomEventCode.Release:
+                GuestSideRelease(photonEvent);
+                break;
+            case PhotonCustomEventCode.Request:
+                GuestSideRequest(photonEvent);
+                break;
+        }
+    }
+
+    private void GuestSideRelease(EventData photonEvent)
+    {
+        
+    }
+    
+    private async Task GuestSideRequest(EventData photonEvent)
+    {
+        var data = (object[]) photonEvent.CustomData;
+        var go = await _itemPool[(int)data[2]].Request();
+        var item = go.GetComponent<PhotonView>();
+        go.transform.position = (Vector3)data[0];
+
+        item.ViewID = (int)data[1];
+        StartCoroutine(ReleaseAfter(go, 5f));
+    }
+
+    private static IEnumerator ReleaseAfter(GameObject item, float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
         
         if (item != null)
         {
-            PhotonNetwork.Destroy(item);
+            item.GetComponent<IPoolItem>().Release();
         }
     }
 
