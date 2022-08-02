@@ -35,27 +35,3 @@ public partial class AmmoPack : MonoBehaviourPunCustomRelease
     private const int Ammo = 30;
 
 }
-
-public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
-{
-    protected void NetworkRelease()
-    {
-        var data = new object[]
-        {
-            photonView.ViewID
-        };
-        
-        var raiseEventOptions = new RaiseEventOptions
-        {
-            Receivers = ReceiverGroup.Others,
-            CachingOption = EventCaching.AddToRoomCache
-        };
-        
-        var sendOptions = new SendOptions()
-        {
-            Reliability = true
-        };
-        
-        PhotonNetwork.RaiseEvent(PhotonCustomEventCode.Release, data, raiseEventOptions, sendOptions);
-    }
-}
