@@ -120,6 +120,8 @@ public partial class ItemSpawner : MonoBehaviourPun
         // var data = (object[])photonEvent.CustomData;
         // var viewId = (int)data[0];
         var viewId = (int)photonEvent.CustomData;
+
+Debug.Log($"call GuestSideRelease {viewId}");        
         ReleaseItemByViewId(viewId);
     }
     
