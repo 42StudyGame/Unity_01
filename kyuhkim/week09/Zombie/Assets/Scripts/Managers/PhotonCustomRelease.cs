@@ -1,6 +1,7 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
 
 public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
 {
@@ -13,6 +14,7 @@ public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
 
     protected void NetworkRelease()
     {
+Debug.Log("call NetworkRelease");
         // var data = new object[]
         // {
         //     photonView.ViewID
