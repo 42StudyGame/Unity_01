@@ -34,6 +34,14 @@ public partial class AmmoPack : IPhotonPoolItem
         // Home.Release(gameObject);
         Home.Release(Viewid);
     }
+    
+    public override void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
+        {
+            Release();
+        }
+    }
 }
 
 public partial class AmmoPack : MonoBehaviourPunCustomRelease

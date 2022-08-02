@@ -1,4 +1,5 @@
 using UnityEngine;
+using ExitGames.Client.Photon;
 
 public partial class HealthPack : IPhotonPoolItem
 {
@@ -28,6 +29,14 @@ public partial class HealthPack : IPhotonPoolItem
     {
         // Home.Release(gameObject);
         Home.Release(Viewid);
+    }
+    
+    public override void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
+        {
+            Release();
+        }
     }
 }
 

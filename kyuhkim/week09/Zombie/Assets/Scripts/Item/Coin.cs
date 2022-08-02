@@ -1,4 +1,7 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public partial class Coin : IPhotonPoolItem
 {
@@ -10,8 +13,6 @@ public partial class Coin : IPhotonPoolItem
         }
         
         _gameManager.AddScore(Score);
-        // make release event;
-        //PhotonNetwork.Destroy(gameObject);
         NetworkRelease();
         Release();
     }
@@ -26,8 +27,15 @@ public partial class Coin : IPhotonPoolItem
 
     public void Release()
     {
-        // Home.Release(gameObject);
         Home.Release(Viewid);
+    }
+
+    public override void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
+        {
+            Release();
+        }
     }
 }
 

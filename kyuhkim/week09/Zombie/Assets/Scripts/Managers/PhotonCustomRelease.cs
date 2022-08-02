@@ -3,7 +3,45 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
+public abstract partial class MonoBehaviourPunCustomRelease : IOnEventCallback
+{
+    public virtual void OnEvent(EventData photonEvent)
+    {
+        // if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
+        // {
+        //     GuestSideRelease(photonEvent);
+        // }
+    }
+    
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+    //
+    // private void GuestSideRelease(EventData photonEvent)
+    // {
+    //     if (PhotonNetwork.IsMasterClient)
+    //     {
+    //         return;
+    //     }
+    //     
+    //     // var data = (object[])photonEvent.CustomData;
+    //     // var viewId = (int)data[0];
+    //     var viewId = (int)photonEvent.CustomData;
+    //
+    //     Debug.Log($"call GuestSideRelease {viewId}");        
+    //     // ReleaseItemByViewId(viewId);
+    //     // 어떻게하지;;;
+    // }
+
+}
+
+public abstract partial class MonoBehaviourPunCustomRelease : MonoBehaviourPun
 {
     protected PhotonView _photonView;
 
