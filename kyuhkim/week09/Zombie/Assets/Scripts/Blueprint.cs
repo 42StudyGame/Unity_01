@@ -1,6 +1,7 @@
 using System;
-using UnityEngine;
 using System.Threading.Tasks;
+using Photon.Pun;
+using UnityEngine;
 
 public interface IMove
 {
@@ -22,7 +23,7 @@ public interface IItem
 
 public interface IPoolItem : IItem
 {
-    public IObjectPool Home { get; set; }
+    public IPhotonObjectPool Home { get; set; }
     public void Release();
 }
 
@@ -73,11 +74,10 @@ public interface IGameManager
     public void AddScore(int score);
 }
 
-public interface IObjectPool
+public interface IPhotonObjectPool
 {
     public Task SetPrefab(string path);
-    public Task<GameObject> Request();
-    public void Release(GameObject target);
+    public Task<PhotonView> Request();
     public void Release(int key);
     public bool Search(int id);
 }

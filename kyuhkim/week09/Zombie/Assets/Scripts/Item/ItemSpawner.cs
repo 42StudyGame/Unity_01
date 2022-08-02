@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Collections;
 using ExitGames.Client.Photon;
@@ -7,7 +5,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 public partial class ItemSpawner : IOnEventCallback
 {
@@ -23,47 +20,7 @@ public partial class ItemSpawner : IOnEventCallback
                 break;
         }
     }
-
-}
-
-public partial class ItemSpawner : MonoBehaviourPun
-{
-    private static readonly string[] _dataName = new string[3] { "modelingData_ammo", "modelingData_ammo", "modelingData_ammo" };
-    private IObjectPool[] _itemPool;
-    [SerializeField] private GameObject[] itemArray;
     
-    private const float MaxDistance = 5f;
-    private const float TimeBetSpawnMax = 7f;
-    private const float TimeBetSpawnMin = 2f;
-    private float _timeBetSpawn;
-    private float _lastSpawnTime;
-
-    private void Start()
-    {
-        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
-        _lastSpawnTime = 0;
-        _itemPool = new IObjectPool[_dataName.Length];
-
-        _itemPool = _itemPool.Select((item, index) => {
-            item = new ObjectPool();
-            item.SetPrefab(_dataName[index]);
-            return item;
-        }).ToArray();
-    }
-
-    private void Update()
-    {
-        if (!PhotonNetwork.IsMasterClient
-            || Time.time < _lastSpawnTime + _timeBetSpawn)
-        {
-            return;
-        }
-        
-        _lastSpawnTime = Time.time;
-        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
-        Spawn();
-    }
-
     private void OnEnable()
     {
         PhotonNetwork.AddCallbackTarget(this);
@@ -74,17 +31,12 @@ public partial class ItemSpawner : MonoBehaviourPun
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    private async void Spawn()
+    private void RaiseEvent(Vector3 position, int viewId, int poolId)
     {
-        var position = GetRandomPointOnNavMesh(Vector3.zero, MaxDistance) + Vector3.up * .5f;
-        var poolId = Random.Range(0, _itemPool.Length);
-        var go = await _itemPool[poolId].Request();
-        var item = go.GetComponent<PhotonView>();
-        
         var data = new object[]
         {
             position,
-            item.ViewID,
+            viewId,
             poolId
         };
 
@@ -100,8 +52,62 @@ public partial class ItemSpawner : MonoBehaviourPun
         };
 
         PhotonNetwork.RaiseEvent(PhotonCustomEventCode.Request, data, raiseEventOptions, sendOptions);
+    }
+}
+
+public partial class ItemSpawner : MonoBehaviourPun
+{
+    private static readonly string[] DataName = new string[3] { "modelingData_ammo", "modelingData_ammo", "modelingData_ammo" };
+    // private static readonly string[] DataName = new string[3] { "modelingData_ammo", "modelingData_coin", "modelingData_healthPack" };
+    private IPhotonObjectPool[] _photonItemPool = null;
+    
+    private const float MaxDistance = 5f;
+    private const float TimeBetSpawnMax = 7f;
+    private const float TimeBetSpawnMin = 2f;
+    private float _timeBetSpawn;
+    private float _lastSpawnTime;
+    private bool _readyToGo = false;
+
+    private async void Start()
+    {
+        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
+        _lastSpawnTime = 0;
+        _photonItemPool = new IPhotonObjectPool[DataName.Length];
+
+        for (var i = 0; i < DataName.Length; ++i)
+        {
+            _photonItemPool[i] = new PhotonObjectPool();
+            await _photonItemPool[i].SetPrefab(DataName[i]);
+        }
+
+        _readyToGo = true;
+    }
+
+    private void Update()
+    {
+        if (!_readyToGo
+            || !PhotonNetwork.IsMasterClient
+            || Time.time < _lastSpawnTime + _timeBetSpawn)
+        {
+            return;
+        }
+        
+        _lastSpawnTime = Time.time;
+        _timeBetSpawn = Random.Range(TimeBetSpawnMin, TimeBetSpawnMax);
+        Spawn();
+    }
+
+    private async void Spawn()
+    {
+        var position = GetRandomPointOnNavMesh(Vector3.zero, MaxDistance) + Vector3.up * .5f;
+        var poolId = Random.Range(0, _photonItemPool.Length);
+        var go = await _photonItemPool[poolId].Request();
+        var viewId = go.GetComponent<PhotonView>().ViewID;
+        
+        RaiseEvent(position, viewId, poolId);
+        
         go.transform.position = position;
-        StartCoroutine(ReleaseAfter(go, 5f));
+        StartCoroutine(ReleaseAfter(viewId, 5f));
     }
 
     private void GuestSideRelease(EventData photonEvent)
@@ -111,11 +117,41 @@ public partial class ItemSpawner : MonoBehaviourPun
             return;
         }
         
-        var data = (object[])photonEvent.CustomData;
-        var viewId = (int)data[0];
-        // var viewId = (int)photonEvent.CustomData;
+        // var data = (object[])photonEvent.CustomData;
+        // var viewId = (int)data[0];
+        var viewId = (int)photonEvent.CustomData;
+        ReleaseItemByViewId(viewId);
+    }
+    
+    private async Task GuestSideRequest(EventData photonEvent)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }
+        
+        var data = (object[]) photonEvent.CustomData;
+        var position = (Vector3)data[0];
+        var viewId = (int)data[1];
+        var poolId = (int)data[2];
+        
+        var go = await _photonItemPool[poolId].Request();
 
-        foreach (var container in _itemPool)
+        go.GetComponent<IPhotonPoolItem>().Viewid = viewId;
+        go.transform.position = position;
+        
+        StartCoroutine(ReleaseAfter(viewId, 5f));
+    }
+    
+    private IEnumerator ReleaseAfter(int viewId, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        ReleaseItemByViewId(viewId);
+    }
+
+    private void ReleaseItemByViewId(int viewId)
+    {
+        foreach (var container in _photonItemPool)
         {
             if (!container.Search(viewId))
             {
@@ -127,35 +163,13 @@ public partial class ItemSpawner : MonoBehaviourPun
         }
     }
     
-    private async Task GuestSideRequest(EventData photonEvent)
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            return;
-        }
-        var data = (object[]) photonEvent.CustomData;
-        var go = await _itemPool[(int)data[2]].Request();
-
-        go.GetComponent<IPhotonPoolItem>().Viewid = (int)data[1];
-        go.transform.position = (Vector3)data[0];
-        
-        StartCoroutine(ReleaseAfter(go, 5f));
-    }
-    
-    private static IEnumerator ReleaseAfter(GameObject item, float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        
-        if (item != null)
-        {
-            item.GetComponent<IPoolItem>().Release();
-        }
-    }
-
     private static Vector3 GetRandomPointOnNavMesh(Vector3 center, float distance)
     {
-        var randomPos = Random.insideUnitSphere * distance + center;
-        NavMesh.SamplePosition(randomPos, out var hit, distance, NavMesh.AllAreas);
+        NavMesh.SamplePosition(
+            Random.insideUnitSphere * distance + center, 
+            out var hit, 
+            distance, 
+            NavMesh.AllAreas);
 
         return hit.position;
     }

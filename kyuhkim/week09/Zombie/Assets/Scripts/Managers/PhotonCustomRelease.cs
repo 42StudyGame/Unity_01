@@ -13,10 +13,11 @@ public abstract class MonoBehaviourPunCustomRelease : MonoBehaviourPun
 
     protected void NetworkRelease()
     {
-        var data = new object[]
-        {
-            photonView.ViewID
-        };
+        // var data = new object[]
+        // {
+        //     photonView.ViewID
+        // };
+        var data = (object)photonView.ViewID;
         
         var raiseEventOptions = new RaiseEventOptions
         {

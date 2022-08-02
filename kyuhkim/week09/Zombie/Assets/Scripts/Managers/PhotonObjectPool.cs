@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public partial class ObjectPool : IObjectPool
+public partial class PhotonObjectPool : IPhotonObjectPool
 {
     public async Task SetPrefab(string path)
     {
@@ -21,10 +20,12 @@ public partial class ObjectPool : IObjectPool
         {
             await Task.Delay(30);
         }
-    
-        _prefab = operationHandle.Result;
-    
-        if (_prefab == null)
+
+        try
+        {
+            _prefab = operationHandle.Result.GetComponent<PhotonView>();
+        }
+        catch
         {
             throw new Exception($"Load fail\nkey = [{path}]");
         }
@@ -32,17 +33,17 @@ public partial class ObjectPool : IObjectPool
         FillOne();
     }
     
-    public async Task<GameObject> Request()
+    public async Task<PhotonView> Request()
     {
         while (_prefab == null)
         {
             Debug.Log("wait loading...");
             await Task.Delay(30);
         }
+Debug.LogWarning($"remain count = {_queue.Count}");
 
         var value = _queue.Dequeue();
-        value.SetActive(true);
-
+        value.gameObject.SetActive(true);
         if (_queue.Count.Equals(0))
         {
             FillOne();
@@ -52,21 +53,13 @@ public partial class ObjectPool : IObjectPool
         return value;
     }
 
-    public void Release(GameObject target)
-    {
-        var key = target.GetComponent<IPhotonPoolItem>().Viewid;
-
-        _account.Remove(key);
-        _queue.Enqueue(target);
-        target.SetActive(false);
-    }
-
     public void Release(int key)
     {
         var value = _account[key];
         _account.Remove(key);
         _queue.Enqueue(value);
-        value.SetActive(false);
+        value.gameObject.SetActive(false);
+Debug.Log($"Released count = {_queue.Count}");        
     }
 
     public bool Search(int id)
@@ -75,24 +68,30 @@ public partial class ObjectPool : IObjectPool
     }
 }
 
-public partial class ObjectPool
+public partial class PhotonObjectPool
 {
-    private GameObject _prefab = null;
-    private Queue<GameObject> _queue;
-    private Dictionary<int, GameObject> _account;
+    private PhotonView _prefab = null;
+    private Queue<PhotonView> _queue;
+    private Dictionary<int, PhotonView> _account;
 
-    public ObjectPool()
+    public PhotonObjectPool()
     {
-        _queue = new Queue<GameObject>();
-        _account = new Dictionary<int, GameObject>();
+        _queue = new Queue<PhotonView>();
+        _account = new Dictionary<int, PhotonView>();
     }
 
     private void FillOne()
     {
-        var value = UnityEngine.Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
+        var value = UnityEngine.Object.Instantiate(_prefab);
+
         value.GetComponent<IPhotonPoolItem>().Home = this;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.AllocateViewID(value);
+        }
         
         _queue.Enqueue(value);
-        value.SetActive(false);
+        value.gameObject.SetActive(false);
     }
 }

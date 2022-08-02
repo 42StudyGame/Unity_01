@@ -21,7 +21,7 @@ public partial class AmmoPack : IPhotonPoolItem
         Release();
     }
     
-    public IObjectPool Home { get; set; }
+    public IPhotonObjectPool Home { get; set; }
 
     public int Viewid
     {
@@ -31,7 +31,8 @@ public partial class AmmoPack : IPhotonPoolItem
 
     public void Release()
     {
-        Home.Release(gameObject);
+        // Home.Release(gameObject);
+        Home.Release(Viewid);
     }
 }
 
