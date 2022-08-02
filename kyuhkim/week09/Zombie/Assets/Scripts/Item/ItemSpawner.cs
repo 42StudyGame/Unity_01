@@ -111,9 +111,9 @@ public partial class ItemSpawner : MonoBehaviourPun
             return;
         }
         
-        // var data = (object)photonEvent.CustomData;
-        // var viewId = (int);
-        var viewId = (int)photonEvent.CustomData;
+        var data = (object[])photonEvent.CustomData;
+        var viewId = (int)data[0];
+        // var viewId = (int)photonEvent.CustomData;
 
         foreach (var container in _itemPool)
         {
@@ -133,10 +133,9 @@ public partial class ItemSpawner : MonoBehaviourPun
         {
             return;
         }
-        
         var data = (object[]) photonEvent.CustomData;
         var go = await _itemPool[(int)data[2]].Request();
-        
+
         go.GetComponent<IPhotonPoolItem>().Viewid = (int)data[1];
         go.transform.position = (Vector3)data[0];
         

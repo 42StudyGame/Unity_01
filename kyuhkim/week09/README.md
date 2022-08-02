@@ -15,7 +15,7 @@
     
 - zombie에서, item들을 어드레서블 시스템으로 변경해보자.
     - 우선 Resources폴더가 아니게 되므로, PhotonNetwork.Instantiate를 사용할 수 없으니 객체 관리 pool을 만들어주고, 수동으로 인스턴스를 생성할 수 있는 로직을 추가해야함 [참고](https://doc.photonengine.com/ko-kr/pun/current/gameplay/instantiation) 
-    - 
+    - 음... ;;; 뭔가 꼬이고 있음... 덩어리고 불필요하게 커지고 있고... 오늘은 자고 내일하자 :)
 
 - 
 
