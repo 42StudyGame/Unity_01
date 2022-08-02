@@ -2,12 +2,11 @@ using System;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
 
-public partial class AmmoPack : IPoolItem
+public partial class AmmoPack : IPhotonPoolItem
 {
-    private Action _release;
-
     public void Use(GameObject target)
     {
         if (target == null || !target.TryGetComponent(out PlayerShooter shooter) ||
@@ -24,6 +23,12 @@ public partial class AmmoPack : IPoolItem
     
     public IObjectPool Home { get; set; }
 
+    public int Viewid
+    {
+        get => _photonView.ViewID;
+        set => _photonView.ViewID = value;
+    }
+
     public void Release()
     {
         Home.Release(gameObject);
@@ -33,5 +38,4 @@ public partial class AmmoPack : IPoolItem
 public partial class AmmoPack : MonoBehaviourPunCustomRelease
 {
     private const int Ammo = 30;
-
 }

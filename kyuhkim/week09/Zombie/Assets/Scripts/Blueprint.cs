@@ -26,6 +26,11 @@ public interface IPoolItem : IItem
     public void Release();
 }
 
+public interface IPhotonPoolItem : IPoolItem
+{
+    public int Viewid { get; set; }
+}
+
 public interface IWeapon
 {
     public void Fire();
@@ -73,6 +78,8 @@ public interface IObjectPool
     public Task SetPrefab(string path);
     public Task<GameObject> Request();
     public void Release(GameObject target);
+    public void Release(int key);
+    public bool Search(int id);
 }
 
 public class PhotonCustomEventCode

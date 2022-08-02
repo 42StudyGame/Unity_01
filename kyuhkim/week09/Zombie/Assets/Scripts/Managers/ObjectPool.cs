@@ -31,15 +31,6 @@ public partial class ObjectPool : IObjectPool
         
         FillOne();
     }
-
-    private void FillOne()
-    {
-        var value = UnityEngine.Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
-        value.GetComponent<IPoolItem>().Home = this;
-        
-        _queue.Enqueue(value);
-        value.SetActive(false);
-    }
     
     public async Task<GameObject> Request()
     {
@@ -56,14 +47,31 @@ public partial class ObjectPool : IObjectPool
         {
             FillOne();
         }
-        
+
+        _account.Add(value.GetComponent<IPhotonPoolItem>().Viewid, value);
         return value;
     }
 
     public void Release(GameObject target)
     {
+        var key = target.GetComponent<IPhotonPoolItem>().Viewid;
+
+        _account.Remove(key);
         _queue.Enqueue(target);
         target.SetActive(false);
+    }
+
+    public void Release(int key)
+    {
+        var value = _account[key];
+        _account.Remove(key);
+        _queue.Enqueue(value);
+        value.SetActive(false);
+    }
+
+    public bool Search(int id)
+    {
+        return _account.ContainsKey(id);
     }
 }
 
@@ -71,14 +79,20 @@ public partial class ObjectPool
 {
     private GameObject _prefab = null;
     private Queue<GameObject> _queue;
+    private Dictionary<int, GameObject> _account;
 
     public ObjectPool()
     {
         _queue = new Queue<GameObject>();
+        _account = new Dictionary<int, GameObject>();
     }
 
-    public void Test()
+    private void FillOne()
     {
-        Debug.Log($"{_prefab}, {_prefab?.name}");
+        var value = UnityEngine.Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
+        value.GetComponent<IPhotonPoolItem>().Home = this;
+        
+        _queue.Enqueue(value);
+        value.SetActive(false);
     }
 }

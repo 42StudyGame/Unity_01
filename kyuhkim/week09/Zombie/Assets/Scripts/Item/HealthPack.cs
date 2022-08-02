@@ -1,7 +1,6 @@
-using Photon.Pun;
 using UnityEngine;
 
-public partial class HealthPack : IPoolItem
+public partial class HealthPack : IPhotonPoolItem
 {
     public void Use(GameObject target)
     {
@@ -19,6 +18,12 @@ public partial class HealthPack : IPoolItem
 
     public IObjectPool Home { get; set; }
     
+    public int Viewid
+    {
+        get => _photonView.ViewID;
+        set => _photonView.ViewID = value;
+    }
+
     public void Release()
     {
         Home.Release(gameObject);
