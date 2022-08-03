@@ -43,7 +43,7 @@ public partial class ItemSpawner : IOnEventCallback
 {
     public void OnEvent(EventData eventData)
     {
-Debug.LogWarning("call OnEvent");
+// Debug.LogWarning("call OnEvent");
         switch (eventData.Code)
         {
             case CustomEventCode.RequestEvent:
@@ -53,7 +53,8 @@ Debug.LogWarning("call OnEvent");
                 EventDespawn(eventData);
                 break;
             default:
-                throw new System.Exception($"wrong event code = [{eventData.Code}]");
+                break;
+                // throw new System.Exception($"wrong event code = [{eventData.Code}]");
         }
     }
 }
