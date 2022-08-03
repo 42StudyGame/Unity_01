@@ -1,0 +1,46 @@
+using Photon.Pun;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviourPun
+{
+    private const float _movceSpeed = 5f;
+    private const float _rotateSpeed = 180f;
+    private IInput _playerInput = null;
+    private Rigidbody _playerRigidbody;
+    private Animator _playerAnimator;
+
+    private void Awake()
+    {
+        _playerInput = GetComponent<IInput>();
+        _playerRigidbody = GetComponent<Rigidbody>();
+        _playerAnimator = GetComponent<Animator>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        
+        Rotate();
+        Move();
+        
+        _playerAnimator.SetFloat("Move",
+            Mathf.Abs(_playerInput.StraightStep) + Mathf.Abs(_playerInput.SideStep));
+    }
+
+    private void Rotate()
+    {
+        var turn = _playerInput.Rotate * (_rotateSpeed * Time.deltaTime);
+        _playerRigidbody.rotation *= Quaternion.Euler(Vector3.up * turn);
+    }
+
+    private void Move()
+    {
+        var moveDistance = transform.forward * (_playerInput.StraightStep * _movceSpeed * Time.deltaTime);
+        moveDistance += transform.right * (_playerInput.SideStep * _movceSpeed * Time.deltaTime);
+        _playerRigidbody.MovePosition(_playerRigidbody.position + moveDistance);
+    }
+}
+
