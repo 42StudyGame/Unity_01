@@ -2,6 +2,7 @@ using System.Collections;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,14 +12,13 @@ public partial class ItemSpawner : ISpawnSender
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            CachingOption = EventCaching.AddToRoomCacheGlobal,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions
         {
             Reliability = true
         };
-
+        
         PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
     }
     
@@ -26,7 +26,6 @@ public partial class ItemSpawner : ISpawnSender
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            CachingOption = EventCaching.RemoveFromRoomCache,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions
