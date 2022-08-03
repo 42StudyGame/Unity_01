@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public partial class ItemSpawner : ISpawnSender
 {
@@ -50,19 +52,25 @@ public partial class ItemSpawner : IOnEventCallback
 {
     public void OnEvent(EventData eventData)
     {
-        var data = (object[])eventData.CustomData;
-        var type = (byte)data[0];
-        
-        switch (type)
+        try
         {
-            case CustomEventCode.RequestEvent:
-                EventSpawn(eventData);
-                break;
-            case CustomEventCode.ReleaseEvent:
-                EventDespawn(eventData);
-                break;
-            default:
-                break;
+            var data = (object[])eventData.CustomData;
+            var type = (byte)data[0];
+        
+            switch (type)
+            {
+                case CustomEventCode.RequestEvent:
+                    EventSpawn(eventData);
+                    break;
+                case CustomEventCode.ReleaseEvent:
+                    EventDespawn(eventData);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch
+        {
         }
     }
 }
