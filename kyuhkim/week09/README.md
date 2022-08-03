@@ -15,25 +15,16 @@
     
 - zombie에서, item들을 어드레서블 시스템으로 변경해보자.
     - 우선 Resources폴더가 아니게 되므로, PhotonNetwork.Instantiate를 사용할 수 없으니 객체 관리 pool을 만들어주고, 수동으로 인스턴스를 생성할 수 있는 로직을 추가해야함 [참고](https://doc.photonengine.com/ko-kr/pun/current/gameplay/instantiation) 
-    - .. RaiseEvent를 ItemSpawner에 사용해봤고, 만족스럽지는 않음.
-```
-        var raiseEventOptions = new RaiseEventOptions
-        {
-            Receivers = ReceiverGroup.Others
-        };
-        var sendOptions = new SendOptions
-        {
-            Reliability = true
-        };
-        
-        PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
+    - .. RaiseEvent를 ItemSpawner에 사용해봤고, 만족스럽지는 않지만.. 일단!
+    ```
+        CachingOption = EventCaching.AddToRoomCacheGlobal
+        CachingOption = EventCaching.RemoveFromRoomCache
+    ```
+    - 위 두가지 기능으로 후반에 진입하는 유저에게 동기화를 시키며, eventCode를 이용해서 위 기능이 동작함
+    - host가 방을 나가버렸을때를 대비하여, AddToRoomCacheGlobal으로 방에 귀속시킴
+    - 
 
-```
-    - 위 코드에, `CachingOption = EventCaching.AddToRoomCacheGlobal`를 추가해야하지만, remove할 방법을 따로 찾아야 함
-    - `CachingOption = EventCaching.RemoveFromRoomCache` 만 하는 것으로는 불가능할 것 같고
-
-- 
-
+- addressable은, 그냥 빌드하니까 된다... (뭔지는 몰라도 편하다 ^^)
 
 
 ---
