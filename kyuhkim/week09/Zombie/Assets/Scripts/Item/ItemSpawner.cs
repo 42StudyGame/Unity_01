@@ -42,6 +42,7 @@ public partial class ItemSpawner : IOnEventCallback
 {
     public void OnEvent(EventData eventData)
     {
+Debug.LogWarning("call OnEvent");
         switch (eventData.Code)
         {
             case CustomEventCode.RequestEvent:
