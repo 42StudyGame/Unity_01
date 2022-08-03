@@ -9,19 +9,19 @@ public partial class LivingEntity : ILiving
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Health -= damage;
-            photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Health, IsDead);
+            Durability -= damage;
+            photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Durability, IsDead);
             photonView.RPC("OnDamage", RpcTarget.Others, damage, hitPoint, hitNormal);
         }
 
-        if (Health <= 0 && !IsDead)
+        if (Durability <= 0 && !IsDead)
         {
             Die();
         }
     }
 
     [PunRPC]
-    public virtual void Restore(float changeAmount)
+    public virtual void Repair(float changeAmount)
     {
         if (IsDead)
         {
@@ -33,14 +33,14 @@ public partial class LivingEntity : ILiving
             return;
         }
         
-        Health += changeAmount;
-        Health = Mathf.Min(Health, startingHealth);
-        photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Health, IsDead);
+        Durability += changeAmount;
+        Durability = Mathf.Min(Durability, startingHealth);
+        photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Durability, IsDead);
         photonView.RPC("Restore", RpcTarget.Others, changeAmount);
     }
 
     public bool IsDead { get; protected set; }
-    public float Health { get; protected set; }
+    public float Durability { get; protected set; }
     public event Action OnDeath;
 }
 
@@ -49,7 +49,7 @@ public partial class LivingEntity : MonoBehaviourPun
     [PunRPC]
     public void ApplyUpdatedHealth(float health, bool isDead)
     {
-        Health = health;
+        Durability = health;
         IsDead = isDead;
     }
     
@@ -58,7 +58,7 @@ public partial class LivingEntity : MonoBehaviourPun
     protected virtual void OnEnable()
     {
         IsDead = false;
-        Health = startingHealth;
+        Durability = startingHealth;
     }
 
     protected virtual void Die()

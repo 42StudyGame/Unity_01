@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f4d47c1411d784835a31e40f96643dd1
+  m_SerializeEntries:
+  - m_GUID: 8707dd3e5d0e044418c52b39a38941dd
+    m_Address: AmmoPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c186414bdcf33441abf1cc0163b2fcbd
+    m_Address: Coin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d2884c834aeb547ee820e7f37f0e5788
+    m_Address: HealthPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 1389c300681774abca812173e3e14d82, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c159530a2b67d4d128f3541de0e2ed8b, type: 2}
+    - {fileID: 11400000, guid: b22182a3206ea48ada214e8abaa92d3d, type: 2}

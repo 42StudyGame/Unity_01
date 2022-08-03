@@ -1,7 +1,8 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
-public partial class AmmoPack : IItem
+public partial class AmmoPack : IPooledItem
 {
     public void Use(GameObject target)
     {
@@ -14,6 +15,8 @@ public partial class AmmoPack : IItem
 
         PhotonNetwork.Destroy(gameObject);
     }
+
+    public Action Release { get; set; }
 }
 
 public partial class AmmoPack : MonoBehaviourPun

@@ -1,7 +1,8 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
-public partial class HealthPack : IItem
+public partial class HealthPack : IPooledItem
 {
     public void Use(GameObject target)
     {
@@ -10,9 +11,11 @@ public partial class HealthPack : IItem
             return;
         }
         
-        life.Restore(Health);
+        life.Repair(Health);
         PhotonNetwork.Destroy(gameObject);
     }
+
+    public Action Release { get; set; }
 }
 
 public partial class HealthPack : MonoBehaviourPun

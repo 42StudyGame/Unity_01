@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Photon.Pun;
 using UnityEngine;
 
-public partial class Coin : IItem
+public partial class Coin : IPooledItem
 {
     public void Use(GameObject target)
     {
@@ -16,6 +17,8 @@ public partial class Coin : IItem
         _gameManager.AddScore(Score);
         PhotonNetwork.Destroy(gameObject);
     }
+
+    public Action Release { get; set; }
 }
 
 public partial class Coin : MonoBehaviour
