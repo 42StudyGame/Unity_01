@@ -54,7 +54,7 @@ public partial class ZombieSpawner : MonoBehaviourPunCallbacks
 
             if (_zombieList.Count.Equals(0))
             {
-                // SpawnWave();
+                SpawnWave();
             }
         }
 

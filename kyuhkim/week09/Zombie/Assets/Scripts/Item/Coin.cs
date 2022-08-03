@@ -1,9 +1,10 @@
-using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using Photon.Pun;
-using Photon.Realtime;
-using ExitGames.Client.Photon;
+using UnityEngine;
 
-public partial class Coin : IPhotonPoolItem
+public partial class Coin : IItem
 {
     public void Use(GameObject target)
     {
@@ -13,38 +14,14 @@ public partial class Coin : IPhotonPoolItem
         }
         
         _gameManager.AddScore(Score);
-        NetworkRelease();
-        Release();
-    }
-
-    public IPhotonObjectPool Home { get; set; }
-    
-    public int Viewid
-    {
-        get => _photonView.ViewID;
-        set => _photonView.ViewID = value;
-    }
-
-    public void Release()
-    {
-        NetworkRelease();
-        Home.Release(Viewid);
-    }
-
-    public override void OnEvent(EventData photonEvent)
-    {
-        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
-        {
-            Release();
-        }
+        PhotonNetwork.Destroy(gameObject);
     }
 }
 
-public partial class Coin : MonoBehaviourPunCustomRelease
+public partial class Coin : MonoBehaviour
 {
     private const int Score = 200;
     private GameManager _gameManager = null;
-
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
