@@ -15,11 +15,23 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: f10f1ac44ea9540cd90ce33f731f9d05
-  m_SerializeEntries: []
+  m_GUID: f4d47c1411d784835a31e40f96643dd1
+  m_SerializeEntries:
+  - m_GUID: 8707dd3e5d0e044418c52b39a38941dd
+    m_Address: AmmoPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c186414bdcf33441abf1cc0163b2fcbd
+    m_Address: Coin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d2884c834aeb547ee820e7f37f0e5788
+    m_Address: HealthPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 0847453d3eb624b8a9f74924c1827058, type: 2}
+  m_Settings: {fileID: 11400000, guid: 1389c300681774abca812173e3e14d82, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 558673f54e1364014a093dbb3dc78aaa, type: 2}
-    - {fileID: 11400000, guid: 6bf01032165b94763bc7ad9fbfd02fc2, type: 2}
+    - {fileID: 11400000, guid: c159530a2b67d4d128f3541de0e2ed8b, type: 2}
+    - {fileID: 11400000, guid: b22182a3206ea48ada214e8abaa92d3d, type: 2}

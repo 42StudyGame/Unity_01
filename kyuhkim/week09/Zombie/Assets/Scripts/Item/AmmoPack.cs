@@ -1,51 +1,33 @@
 using System;
-using ExitGames.Client.Photon;
 using Photon.Pun;
-using Photon.Realtime;
-using TMPro;
 using UnityEngine;
 
-public partial class AmmoPack : IPhotonPoolItem
+public partial class AmmoPack : IPooledItem
 {
     public void Use(GameObject target)
     {
-        if (target == null || !target.TryGetComponent(out PlayerShooter shooter) ||
-            shooter.Weapon is not Gun gun)
+        var shooter = target.GetComponent<PlayerShooter>();
+
+        if (shooter != null && shooter.Weapon is Gun gun)
         {
-            return;
+            gun.photonView.RPC("AddAmmo", RpcTarget.All, Ammo);
         }
-        
-        gun.photonView.RPC("AddAmmo", RpcTarget.All, Ammo);
 
-        NetworkRelease();
-        Release();
-    }
-    
-    public IPhotonObjectPool Home { get; set; }
-
-    public int Viewid
-    {
-        get => _photonView.ViewID;
-        set => _photonView.ViewID = value;
+        photonView.RPC("ReleaseOnServer", RpcTarget.Others);
+        Release?.Invoke();
+        // PhotonNetwork.Destroy(gameObject);
     }
 
-    public void Release()
-    {
-        // Home.Release(gameObject);
-        NetworkRelease();
-        Home.Release(Viewid);
-    }
-    
-    public override void OnEvent(EventData photonEvent)
-    {
-        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
-        {
-            Release();
-        }
-    }
+    public Action Release { get; set; }
 }
 
-public partial class AmmoPack : MonoBehaviourPunCustomRelease
+public partial class AmmoPack : MonoBehaviourPun
 {
     private const int Ammo = 30;
+
+    [PunRPC]
+    private void ReleaseOnServer()
+    {
+        Release?.Invoke();
+    }
 }

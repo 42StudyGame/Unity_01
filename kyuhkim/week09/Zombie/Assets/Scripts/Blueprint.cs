@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Photon.Pun;
+using ExitGames.Client.Photon;
 using UnityEngine;
 
 public interface IMove
@@ -21,15 +21,9 @@ public interface IItem
     public void Use(GameObject target);
 }
 
-public interface IPoolItem : IItem
+public interface IPooledItem : IItem
 {
-    public IPhotonObjectPool Home { get; set; }
-    public void Release();
-}
-
-public interface IPhotonPoolItem : IPoolItem
-{
-    public int Viewid { get; set; }
+    public Action Release { get; set; }
 }
 
 public interface IWeapon
@@ -50,11 +44,19 @@ public interface IDamageable
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal);
 }
 
-public interface ILiving : IDamageable
+public interface IRepairable
 {
-    public float Health { get; }
+    public void Repair(float changeAmount);
+}
+
+public interface IDurability
+{
+    public float Durability { get; }
+}
+
+public interface ILiving : IDamageable, IRepairable, IDurability
+{
     public bool IsDead { get; }
-    public void Restore(float changeAmount);
     public event Action OnDeath;
 }
 
@@ -74,16 +76,31 @@ public interface IGameManager
     public void AddScore(int score);
 }
 
-public interface IPhotonObjectPool
+public interface ISyncObjectPool<T>
 {
-    public Task SetPrefab(string path);
-    public Task<PhotonView> Request();
+    public Task<T> RequestBy(int id = 0);
     public void Release(int key);
-    public PhotonView Search(int id);
+    // public Task SetPrefab(string addressName);
+    public bool IsAccounted(int key);
 }
 
-public class PhotonCustomEventCode
+public interface ISpawnReceiver
 {
-    public const byte Request = 1;
-    public const byte Release = 2;
+    public void EventSpawn(EventData eventData);
+    public void EventDespawn(EventData eventData);
+}
+
+public interface ISpawnSender
+{
+    public void RaiseSpawnEvent(params object[] param);
+    public void RaiseDespawnEvent(params object[] param);
+}
+
+public class CustomEventCode
+{
+    public const byte HealthPackEvent = 10;
+    public const byte AmmoEvent = 11;
+    public const byte CoinEvent = 12;
+    public const byte RequestEvent = 0;
+    public const byte ReleaseEvent = 1;
 }

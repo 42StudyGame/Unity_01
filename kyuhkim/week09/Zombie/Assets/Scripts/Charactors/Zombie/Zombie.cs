@@ -52,7 +52,7 @@ public class Zombie : LivingEntity
     public void Setup(float health, float damage, float speed, Color skinColor)
     {
         startingHealth = health;
-        Health = health;
+        Durability = health;
         _damage = damage;
         _navMeshAgent.speed = speed;
         _zombieRenderer.material.color = skinColor;

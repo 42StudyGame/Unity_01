@@ -1,7 +1,8 @@
+using System;
+using Photon.Pun;
 using UnityEngine;
-using ExitGames.Client.Photon;
 
-public partial class HealthPack : IPhotonPoolItem
+public partial class HealthPack : IPooledItem
 {
     public void Use(GameObject target)
     {
@@ -10,38 +11,22 @@ public partial class HealthPack : IPhotonPoolItem
             return;
         }
         
-        life.Restore(Health);
-        // make release event;
+        life.Repair(Health);
+        photonView.RPC("ReleaseOnServer", RpcTarget.Others);
+        Release?.Invoke();
         // PhotonNetwork.Destroy(gameObject);
-        NetworkRelease();
-        Release();
     }
 
-    public IPhotonObjectPool Home { get; set; }
-    
-    public int Viewid
-    {
-        get => _photonView.ViewID;
-        set => _photonView.ViewID = value;
-    }
-
-    public void Release()
-    {
-        // Home.Release(gameObject);
-        NetworkRelease();
-        Home.Release(Viewid);
-    }
-    
-    public override void OnEvent(EventData photonEvent)
-    {
-        if (photonEvent.Code.Equals(PhotonCustomEventCode.Release))
-        {
-            Release();
-        }
-    }
+    public Action Release { get; set; }
 }
 
-public partial class HealthPack : MonoBehaviourPunCustomRelease
+public partial class HealthPack : MonoBehaviourPun
 {
     private const int Health = 50;
+
+    [PunRPC]
+    private void ReleaseOnServer()
+    {
+        Release?.Invoke();
+    }
 }

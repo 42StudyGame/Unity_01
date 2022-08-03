@@ -36,17 +36,17 @@ public class PlayerHealth : LivingEntity
         
         _healthSlider.gameObject.SetActive(true);
         _healthSlider.maxValue = startingHealth;
-        _healthSlider.value = Health;
+        _healthSlider.value = Durability;
 
         _playerMovement.enabled = true;
         _playerShooter.enabled = true;
     }
     
     [PunRPC]
-    public override void Restore(float changeAmount)
+    public override void Repair(float changeAmount)
     {
-        base.Restore(changeAmount);
-        _healthSlider.value = Health;
+        base.Repair(changeAmount);
+        _healthSlider.value = Durability;
     }
     
     [PunRPC]
@@ -59,7 +59,7 @@ public class PlayerHealth : LivingEntity
             
         base.OnDamage(damage, hitPoint, hitDirection);
         _playerAudioPlayer.PlayOneShot(_hitClip);
-        _healthSlider.value = Health;
+        _healthSlider.value = Durability;
     }
 
     protected override void Die()
