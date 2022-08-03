@@ -11,7 +11,7 @@ public partial class ItemSpawner : ISpawnSender
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            CachingOption = EventCaching.AddToRoomCache,
+            // CachingOption = EventCaching.AddToRoomCacheGlobal,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions
@@ -19,7 +19,6 @@ public partial class ItemSpawner : ISpawnSender
             Reliability = true
         };
 
-Debug.LogWarning("call RaiseSpawnEvent");
         PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
     }
     
@@ -27,7 +26,7 @@ Debug.LogWarning("call RaiseSpawnEvent");
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            CachingOption = EventCaching.RemoveFromRoomCache,
+            // CachingOption = EventCaching.RemoveFromRoomCache,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions
@@ -43,7 +42,6 @@ public partial class ItemSpawner : IOnEventCallback
 {
     public void OnEvent(EventData eventData)
     {
-// Debug.LogWarning("call OnEvent");
         switch (eventData.Code)
         {
             case CustomEventCode.RequestEvent:
@@ -54,7 +52,6 @@ public partial class ItemSpawner : IOnEventCallback
                 break;
             default:
                 break;
-                // throw new System.Exception($"wrong event code = [{eventData.Code}]");
         }
     }
 }
@@ -181,3 +178,14 @@ public partial class ItemSpawner : MonoBehaviourPun
         throw new System.Exception($"wrong ViewID = [{viewId}]");
     }
 }
+
+// RPC method 'Restore(Single)' not found on object with PhotonView 3001. Implement as non-static. Apply [PunRPC]. Components on children are not found. Return type must be void or IEnumerator (if you enable RunRpcCoroutines). RPCs are a one-way message.
+//     UnityEngine.Debug:LogErrorFormat (UnityEngine.Object,string,object[])
+// Photon.Pun.PhotonNetwork:ExecuteRpc (ExitGames.Client.Photon.Hashtable,Photon.Realtime.Player) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:640)
+// Photon.Pun.PhotonNetwork:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs:2201)
+// Photon.Realtime.LoadBalancingClient:OnEvent (ExitGames.Client.Photon.EventData) (at Assets/Photon/PhotonRealtime/Code/LoadBalancingClient.cs:3353)
+// ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback (ExitGames.Client.Photon.StreamBuffer) (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PeerBase.cs:899)
+// ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/EnetPeer.cs:565)
+// ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands () (at D:/Dev/Work/photon-dotnet-sdk/PhotonDotNet/PhotonPeer.cs:1771)
+// Photon.Pun.PhotonHandler:Dispatch () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:222)
+// Photon.Pun.PhotonHandler:FixedUpdate () (at Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs:145)

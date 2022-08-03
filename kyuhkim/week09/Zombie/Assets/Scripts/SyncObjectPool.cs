@@ -30,15 +30,9 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
             item = Object.Instantiate(_prefab);
             
             if (item.TryGetComponent(out IPooledItem pooledItem))
-            // if (item is IPooledItem pooledItem)
             {
                 pooledItem.Release = () => {
                     Release(item.ViewID);
-                    // _account.Remove(item.ViewID);
-                    // _queue.Enqueue(item);
-                    //
-                    // item.ViewID = PhotonNetwork.SyncViewId;
-                    // item.gameObject.SetActive(false);
                 };
             }
             else
@@ -52,10 +46,6 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
             item = _queue.Dequeue();
         }
 
-        // if (PhotonNetwork.IsMasterClient)
-        // {
-        //     PhotonNetwork.AllocateViewID(item);
-        // }
         if (id.Equals(0))
         {
             PhotonNetwork.AllocateViewID(item);
@@ -118,17 +108,7 @@ public partial class SyncObjectPool<T> where T : PhotonView
         {
             throw new System.Exception($"wrong address name = [{addressName}]");
         }
-        
-        // AtLeastOneInPool();
     }
-
-    // private void AtLeastOneInPool()
-    // {
-    //     var item = Object.Instantiate(_prefab);
-    //
-    //     item.gameObject.SetActive(false);
-    //     _queue.Enqueue(item);
-    // }
 }
 
 
