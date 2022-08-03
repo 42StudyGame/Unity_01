@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -5,6 +6,7 @@ using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Object = UnityEngine.Object;
 
 public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView 
 {
@@ -62,13 +64,19 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
     
     public void Release(int key)
     {
-        var item = _account[key];
+        try
+        {
+            var item = _account[key];
         
-        _account.Remove(key);
-        _queue.Enqueue(item);
+            _account.Remove(key);
+            _queue.Enqueue(item);
     
-        item.ViewID = PhotonNetwork.SyncViewId;
-        item.gameObject.SetActive(false);
+            item.ViewID = PhotonNetwork.SyncViewId;
+            item.gameObject.SetActive(false);
+        }
+        catch
+        {
+        }
     }
 
     public bool IsAccounted(int key)
