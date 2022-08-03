@@ -98,6 +98,9 @@ public interface ISpawnSender
 
 public class CustomEventCode
 {
+    public const byte HealthPackEvent = 10;
+    public const byte AmmoEvent = 11;
+    public const byte CoinEvent = 12;
     public const byte RequestEvent = 0;
     public const byte ReleaseEvent = 1;
 }

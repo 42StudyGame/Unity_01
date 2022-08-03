@@ -12,6 +12,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     private const string GameVersion = "1";
     private const int RoomSpace = 4;
+    private const float QuitLimit = .5f;
+    private float _quit = 0;
     [SerializeField] private TextMeshProUGUI _connection;
     [SerializeField] private Button _button;
 
@@ -22,6 +24,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         _button.interactable = false;
         _connection.text = "Connecting to server...";
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.Escape))
+        {
+            return;
+        }
+
+        if (Time.time < _quit + QuitLimit)
+        {
+            Application.Quit();
+        }
+        else
+        {
+            _quit = Time.time;
+        }
     }
     
     public override void OnConnectedToMaster()

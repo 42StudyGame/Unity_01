@@ -9,30 +9,40 @@ public partial class ItemSpawner : ISpawnSender
 {
     public void RaiseSpawnEvent(params object[] param)
     {
+        var code = (byte)((int)param[1] + 10);
+        
         var raiseEventOptions = new RaiseEventOptions
         {
+            CachingOption = EventCaching.AddToRoomCacheGlobal,
             Receivers = ReceiverGroup.Others
         };
+        
         var sendOptions = new SendOptions
         {
             Reliability = true
         };
         
-        PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
+        // PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
+        PhotonNetwork.RaiseEvent(code, param, raiseEventOptions, sendOptions);
     }
     
     public void RaiseDespawnEvent(params object[] param)
     {
+        var code = (byte)((int)param[1] + 10);
+        
         var raiseEventOptions = new RaiseEventOptions
         {
+            CachingOption = EventCaching.RemoveFromRoomCache,
             Receivers = ReceiverGroup.Others
         };
+        
         var sendOptions = new SendOptions
         {
             Reliability = true
         };
 
-        PhotonNetwork.RaiseEvent(CustomEventCode.ReleaseEvent, param, raiseEventOptions, sendOptions);
+        // PhotonNetwork.RaiseEvent(CustomEventCode.ReleaseEvent, param, raiseEventOptions, sendOptions);
+        PhotonNetwork.RaiseEvent(code, param, raiseEventOptions, sendOptions);
     }
 }
 
@@ -40,7 +50,10 @@ public partial class ItemSpawner : IOnEventCallback
 {
     public void OnEvent(EventData eventData)
     {
-        switch (eventData.Code)
+        var data = (object[])eventData.CustomData;
+        var type = (byte)data[0];
+        
+        switch (type)
         {
             case CustomEventCode.RequestEvent:
                 EventSpawn(eventData);
@@ -60,9 +73,9 @@ public partial class ItemSpawner : ISpawnReceiver
     {
         var data = (object[])eventData.CustomData;
 
-        var position = (Vector3)data[0];
         var poolId = (int)data[1];
         var viewId = (int)data[2];
+        var position = (Vector3)data[3];
         
         var item = await _poolArray[poolId].RequestBy(viewId);
         item.transform.position = position;
@@ -74,8 +87,8 @@ public partial class ItemSpawner : ISpawnReceiver
     {
         var data = (object[])eventData.CustomData;
         
-        var poolId = (int)data[0];
-        var viewId = (int)data[1];
+        var poolId = (int)data[1];
+        var viewId = (int)data[2];
 
         _poolArray[poolId].Release(viewId);
     }
@@ -137,7 +150,7 @@ public partial class ItemSpawner : MonoBehaviourPun
         var poolId = Random.Range(0, AddressNameArray.Length);
         var item = await _poolArray[poolId].RequestBy();
 
-        RaiseSpawnEvent(new object[] { position, poolId, item.ViewID });
+        RaiseSpawnEvent(new object[] { CustomEventCode.RequestEvent, poolId, item.ViewID, position });
         item.transform.position = position;
         StartCoroutine(DestoryAfter(item, 5f));
     }
@@ -151,7 +164,7 @@ public partial class ItemSpawner : MonoBehaviourPun
             yield break;
         }
         
-        RaiseDespawnEvent(new object[] { ContainerId(item.ViewID), item.ViewID });
+        RaiseDespawnEvent(new object[] { CustomEventCode.ReleaseEvent, ContainerId(item.ViewID), item.ViewID });
         pooledItem.Release();
     }
 
