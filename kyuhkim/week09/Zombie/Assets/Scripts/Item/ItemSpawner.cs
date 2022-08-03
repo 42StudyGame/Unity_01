@@ -19,6 +19,7 @@ public partial class ItemSpawner : ISpawnSender
             Reliability = true
         };
 
+Debug.LogWarning("call RaiseSpawnEvent");
         PhotonNetwork.RaiseEvent(CustomEventCode.RequestEvent, param, raiseEventOptions, sendOptions);
     }
     
@@ -123,7 +124,17 @@ public partial class ItemSpawner : MonoBehaviourPun
         _timeBetSpawn = Random.Range(_timeBetSpawnMin, _timeBetSpawnMax);
         Spawn();
     }
+    
+    public void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
 
+    public void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+    
     private async void Spawn()
     {
         var position = GetRandomPointOnNavMesh(Vector3.zero, _maxDistance) + Vector3.up * .5f;
