@@ -11,7 +11,7 @@ public partial class ItemSpawner : ISpawnSender
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            // CachingOption = EventCaching.AddToRoomCacheGlobal,
+            CachingOption = EventCaching.AddToRoomCacheGlobal,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions
@@ -26,7 +26,7 @@ public partial class ItemSpawner : ISpawnSender
     {
         var raiseEventOptions = new RaiseEventOptions
         {
-            // CachingOption = EventCaching.RemoveFromRoomCache,
+            CachingOption = EventCaching.RemoveFromRoomCache,
             Receivers = ReceiverGroup.Others
         };
         var sendOptions = new SendOptions

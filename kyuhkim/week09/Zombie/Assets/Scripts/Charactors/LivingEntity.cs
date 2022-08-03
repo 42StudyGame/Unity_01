@@ -36,7 +36,6 @@ public partial class LivingEntity : ILiving
         Durability += changeAmount;
         Durability = Mathf.Min(Durability, startingHealth);
         photonView.RPC("ApplyUpdatedHealth", RpcTarget.Others, Durability, IsDead);
-        // photonView.RPC("Restore", RpcTarget.Others, changeAmount);
         photonView.RPC("Repair", RpcTarget.Others, changeAmount);
     }
 
