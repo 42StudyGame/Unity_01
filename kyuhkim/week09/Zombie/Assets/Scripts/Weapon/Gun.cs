@@ -117,7 +117,7 @@ public partial class Gun : MonoBehaviourPun
 
         Physics.Raycast(fireTransform.position, fireTransform.forward, out var hit, _fireDistance);
 
-        if (hit.collider.TryGetComponent(out IDamageable damageable))
+        if (hit.collider != null && hit.collider.TryGetComponent(out IDamageable damageable))
         {
             damageable.OnDamage(gunData.damage, hit.point, hit.normal);
             hitPosition = hit.point;

@@ -102,7 +102,8 @@ public partial class SyncObjectPool<T> where T : PhotonView
 
     private async Task SetPrefab(string addressName)
     {
-        var handler = Addressables.LoadAssetAsync<PhotonView>(addressName);
+        // var handler = Addressables.LoadAssetAsync<PhotonView>(addressName);
+        var handler = Addressables.LoadAssetAsync<GameObject>(addressName);
 
         while (!handler.IsDone)
         {
@@ -110,7 +111,7 @@ public partial class SyncObjectPool<T> where T : PhotonView
             await Task.Delay(30);
         }
 
-        _prefab = handler.Result as T;
+        _prefab = handler.Result.GetComponent<T>();
 
         if (_prefab == null)
         {
