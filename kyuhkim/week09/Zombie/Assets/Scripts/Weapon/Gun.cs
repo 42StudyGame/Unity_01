@@ -1,8 +1,5 @@
-using System;
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public partial class Gun : IPunObservable
@@ -142,22 +139,6 @@ public partial class Gun : MonoBehaviourPun
     
     private void Shot()
     {
-        // Vector3 hitPosition;
-        //
-        // Physics.Raycast(fireTransform.position, fireTransform.forward, out var hit, _fireDistance);
-        //
-        // if (hit.collider.TryGetComponent(out IDamageable damageable))
-        // {
-        //     damageable.OnDamage(gunData.damage, hit.point, hit.normal);
-        //     hitPosition = hit.point;
-        // }
-        // else
-        // {
-        //     hitPosition = fireTransform.position + fireTransform.forward * _fireDistance;
-        // }
-        //
-        // StartCoroutine(ShotEffect(hitPosition));
-
         photonView.RPC("ShotProcessOnServer", RpcTarget.MasterClient);
         
         --magAmmo;

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using ExitGames.Client.Photon;
 using UnityEngine;
 
 public interface IMove
@@ -78,14 +79,21 @@ public interface IGameManager
 public interface ISyncObjectPool<T>
 {
     public Task<T> RequestBy(int id = 0);
-    // public void Release(int key);
+    public void Release(int key);
     // public Task SetPrefab(string addressName);
+    public bool IsAccounted(int key);
 }
 
-public interface ISpawner
+public interface ISpawnReceiver
 {
-    public void EventSpawn();
-    public void EventDespawn();
+    public void EventSpawn(EventData eventData);
+    public void EventDespawn(EventData eventData);
+}
+
+public interface ISpawnSender
+{
+    public void RaiseSpawnEvent(params object[] param);
+    public void RaiseDespawnEvent(params object[] param);
 }
 
 public class CustomEventCode

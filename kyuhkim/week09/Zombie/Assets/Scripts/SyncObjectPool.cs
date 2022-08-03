@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Photon.Pun;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -28,14 +29,16 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
         {
             item = Object.Instantiate(_prefab);
             
-            if (item is IPooledItem pooledItem)
+            if (item.TryGetComponent(out IPooledItem pooledItem))
+            // if (item is IPooledItem pooledItem)
             {
                 pooledItem.Release = () => {
-                    _account.Remove(item.ViewID);
-                    _queue.Enqueue(item);
-
-                    item.ViewID = PhotonNetwork.SyncViewId;
-                    item.gameObject.SetActive(false);
+                    Release(item.ViewID);
+                    // _account.Remove(item.ViewID);
+                    // _queue.Enqueue(item);
+                    //
+                    // item.ViewID = PhotonNetwork.SyncViewId;
+                    // item.gameObject.SetActive(false);
                 };
             }
             else
@@ -49,7 +52,11 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
             item = _queue.Dequeue();
         }
 
-        if (PhotonNetwork.IsMasterClient)
+        // if (PhotonNetwork.IsMasterClient)
+        // {
+        //     PhotonNetwork.AllocateViewID(item);
+        // }
+        if (id.Equals(0))
         {
             PhotonNetwork.AllocateViewID(item);
         }
@@ -57,21 +64,27 @@ public partial class SyncObjectPool<T> : ISyncObjectPool<T> where T : PhotonView
         {
             item.ViewID = id;
         }
-
+        
+        _account.Add(item.ViewID, item);
         item.gameObject.SetActive(true);
         return item;
     }
-    //
-    // public void Release(int key)
-    // {
-    //     var item = _account[key];
-    //     
-    //     _account.Remove(key);
-    //     _queue.Enqueue(item);
-    //
-    //     item.ViewID = PhotonNetwork.SyncViewId;
-    //     item.gameObject.SetActive(false);
-    // }
+    
+    public void Release(int key)
+    {
+        var item = _account[key];
+        
+        _account.Remove(key);
+        _queue.Enqueue(item);
+    
+        item.ViewID = PhotonNetwork.SyncViewId;
+        item.gameObject.SetActive(false);
+    }
+
+    public bool IsAccounted(int key)
+    {
+        return _account.ContainsKey(key);
+    }
 }
 
 public partial class SyncObjectPool<T> where T : PhotonView

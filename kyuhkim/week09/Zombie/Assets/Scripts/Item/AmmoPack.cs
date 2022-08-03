@@ -13,7 +13,9 @@ public partial class AmmoPack : IPooledItem
             gun.photonView.RPC("AddAmmo", RpcTarget.All, Ammo);
         }
 
-        PhotonNetwork.Destroy(gameObject);
+        photonView.RPC("ReleaseOnServer", RpcTarget.Others);
+        Release?.Invoke();
+        // PhotonNetwork.Destroy(gameObject);
     }
 
     public Action Release { get; set; }
@@ -22,4 +24,10 @@ public partial class AmmoPack : IPooledItem
 public partial class AmmoPack : MonoBehaviourPun
 {
     private const int Ammo = 30;
+
+    [PunRPC]
+    private void ReleaseOnServer()
+    {
+        Release?.Invoke();
+    }
 }

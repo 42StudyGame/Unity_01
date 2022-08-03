@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using Photon.Pun;
 using UnityEngine;
 
@@ -15,18 +12,26 @@ public partial class Coin : IPooledItem
         }
         
         _gameManager.AddScore(Score);
-        PhotonNetwork.Destroy(gameObject);
+        photonView.RPC("ReleaseOnServer", RpcTarget.Others);
+        Release?.Invoke();
+        // PhotonNetwork.Destroy(gameObject);
     }
 
     public Action Release { get; set; }
 }
 
-public partial class Coin : MonoBehaviour
+public partial class Coin : MonoBehaviourPun
 {
     private const int Score = 200;
     private GameManager _gameManager = null;
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
+    }
+
+    [PunRPC]
+    private void ReleaseOnServer()
+    {
+        Release?.Invoke();
     }
 }
