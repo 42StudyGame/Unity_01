@@ -8,7 +8,7 @@
         - 4부 공간 실습한 프로젝트를 github에 올리고 동작 영상 올리기
 
 # 영상 링크
-
+    https://youtu.be/H8h8l40_NU0
 
 # 벡터 수학
 - 벡터(Vector)란?
@@ -60,7 +60,7 @@ Math.sqrt((x * x) + (y * y));
 - 벡터 내적
     - 적은 '쌓는다'는 뜻의 한자이고, 여기서는 '곱한다'는 뜻이다. 벡터의 곱하기는 두 가지 정의가 있는데, 내적은 벡터를 마치 수처럼 곱하는 개념.
     - 벡터의 내적의 결과값은 벡터가 아닌 스칼라.
-    <img srg ="https://wikidocs.net/images/page/22384/inner_product.png">
+    <br><img srg ="https://wikidocs.net/images/page/22384/inner_product.png"><br>
     - 내적의 기호는 가운데 점을 찍는 것(·)이고, 위 이미지의 벡터 크기를 절대값으로 표시하면, 내적의 값은 다음과 같다.
     - A·B = |A||B|cosθ
     - 내적을 통하여 두 물체 사이의 각도가 얼마만큼 벌어졌는지 쉽게 파악할 수 있다.
@@ -123,11 +123,11 @@ Math.sqrt((x * x) + (y * y));
         - 물체가 '회전하기 전의 좌표계'에서 '회전한 다음의 좌표계'로 바뀌려면 기존 좌표계를 세 번에 걸쳐 얼마만큼 회전하면 되는지, 세 각도로 물체의 회전을 표현
         - 풀어 쓰면 회전하기 전 상태에서 회전한 다음 상태까지의 3단계
     - 짐벌락이란?
-        <img src="https://blog.kakaocdn.net/dn/xr8Hv/btrmZ1QlbAD/rqXfRzKwF2xGnkXHii2gok/img.gif">
+        <br><img src="https://blog.kakaocdn.net/dn/xr8Hv/btrmZ1QlbAD/rqXfRzKwF2xGnkXHii2gok/img.gif"><br>
         - 크기가 각각 다른 세 고리가 회전하는 모형인 짐벌이 있고, 안쪽 고리가 회전축을 소실하는 현상
         - 각각의 고리는 고유한 축을 기준으로 회전하는데 이는 가장 바깥쪽 고리만 해당할 뿐 안쪽 고리들은 여러 방향으로 회전함을 알 수 있다.
         - 안쪽 고리가 여러 방향으로 회전하는 이유는 고리가 종속 관계를 형성하기 때문이다. 즉 한 고리의 회전이 안쪽 고리의 회전에 영향을 주며 고리의 회전으로 인해 의도치 않게 두 개 이상의 고리가 겹치게 되면 한 축의 회전각이 소실되는데 이 현상을 짐벌락이라 한다.
-        <img src="https://blog.kakaocdn.net/dn/dZtKME/btrm0qijxg2/OwYyeoqI7ZMobFvUvXEK90/img.gif">
+        <br><img src="https://blog.kakaocdn.net/dn/dZtKME/btrm0qijxg2/OwYyeoqI7ZMobFvUvXEK90/img.gif"><br>
         - 녹색 고리의 회전으로 인해 분홍색 고리와 파란색 고리가 겹치게 되면 두 고리의 회전은 동일한 결과를 낳게 되면서 자연스럽게 한 축의 회전은 소실된다.
         - 어떤 축(x, y, z)의 회전이 다른 축의 회전에 영향을 주고, 이에 따라 오일러각 체계에서는 두 번의 회전에 의해 세 번째 회전이 자유도를 상실한다.
 
@@ -160,3 +160,9 @@ Math.sqrt((x * x) + (y * y));
         Quaternion rotation = a * b;
         // 여기서 더 회전은 덧셈이 아니라 곱셉으로 표현한다.
         ```
+
+# Week04 간략한 후기
+
+코로나에 걸리고 약을 먹으니 머리가 안 돌아간다. 그래도 후딱 집중해서 이틀만에 다 봤다.
+확실히 알고 넘어가야 할 것, 대충 짚고 넘어가야 할 것을 책에서 구분해줘서 조금 편했다.
+벡터로 인해 MiniRT나 Cub3D에서 필요한 삼각함수를 복습할 수 있어서 좋았다! :)
