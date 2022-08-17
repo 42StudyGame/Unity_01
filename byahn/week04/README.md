@@ -10,8 +10,10 @@
 ## 과제 1
 - 과제
     - 4부 공간 실습한 프로젝트를 github에 올리고 동작 영상 올리기
+        - https://drive.google.com/file/d/1WmLhM5DrPYF_M8lcq5gzOkpPHbGgthLN/view?usp=sharing
 
 ## 내용 정리
+### 9장 방향, 크기, 회전
 - 벡터
     - 벡터의 덧셈
         - A(3, 2) + B(1,6) = (4, 8)
@@ -95,3 +97,31 @@
 
             Quaternion rotation = a * b;
         ```
+
+### 10장 공간과 움직임
+- 유니티 공간
+    - 전역 공간(월드 공간)
+        - 월드의 중심이라는 절대 기준이 존재하는 공간
+        - 게임 월드의 원점을 기준으로 위치를 측정
+    - 오브젝트 공간
+        - 자기 자신을 기준으로 위치를 측정
+    - 지역 공간
+        - 자신의 부모 오브젝트를 기준으로 위치를 측정
+    - 유니티는 편의상 지역 공간과 오브젝트 공간을 합쳐서 지역 공간으로 부른다.
+
+- 오브젝트의 이동과 회전
+    - transform.Translate() 메서드
+        ```cs
+            // 지역 공간 기준으로 y축으로 이동 (2번째 매개변수 Space.Self는 기본값이므로 생략 가능)
+            transform.Translate(new Vector3 (0, 1, 0) * Time.deltaTime, Space.Self);
+            // 전역 공간 기준으로 y축으로 이동
+            transform.Translate(new Vector3 (0, 1, 0) * Time.deltaTime, Space.World);
+        ```
+    - 벡터의 속기
+        - 미리 만들어진 방향벡터들
+        - Vector3.forward : new Vector3(0, 0, 1)
+        - Vector3.back : new Vector3(0, 0, -1)
+        - Vector3.right : new Vector3(1, 0, 0)
+        - Vector3.left : new Vector3(-1, 0, 0)
+        - Vector3.up : new Vector3(0, 1, 0)
+        - Vector3.down : new Vector3(0, -1, 0)
