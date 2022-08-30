@@ -7,7 +7,7 @@
 
 ## 과제 1
 - 5부 유니런 실습한 프로젝트를 github에 올리고 실행 영상 올리기
-- https://vimeo.com/742196263
+- https://vimeo.com/744588925
 
 ## 궁금한 점
 - Update()메서드에서 Time.deltaTime 을 곱하는 것은 컴퓨터 성능에 따라 1프레임이 돌아가는 속도가 다르니 곱해주는 것은 알겠는데, 그러면 FixedUpdate()메서드는 프레임 기준이 아닌 일정한 주기별로 돌아가니 Time.fixedDeltaTime을 곱해줄 필요가 없지 않나..?
