@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 // 발판을 생성하고 주기적으로 재배치하는 스크립트
-public class PlatformSpawner : MonoBehaviour {
+public class PlatformSpawner : MonoBehaviour
+{
     public GameObject platformPrefab; // 생성할 발판의 원본 프리팹
     public int count = 3; // 생성할 발판의 개수
 
@@ -20,11 +21,37 @@ public class PlatformSpawner : MonoBehaviour {
     private float lastSpawnTime; // 마지막 배치 시점
 
 
-    void Start() {
+    void Start()
+    {
         // 변수들을 초기화하고 사용할 발판들을 미리 생성
+        platforms = new GameObject[count];
+        for (int i = 0; i < count; ++i)
+        {
+            platforms[i] = Instantiate(platformPrefab, poolPosition, Quaternion.identity);
+        }
+        lastSpawnTime = 0f;
+        timeBetSpawn = 0f;
     }
 
-    void Update() {
-        // 순서를 돌아가며 주기적으로 발판을 배치
+    void Update()
+    {
+        if (GameManager.instance.isGameover)
+        {
+            return;
+        }
+        if (Time.time >= lastSpawnTime + timeBetSpawn)
+        {
+            lastSpawnTime = Time.time;
+            timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
+            float yPos = Random.Range(yMin, yMax);
+            platforms[currentIndex].SetActive(false);
+            platforms[currentIndex].SetActive(true);
+            platforms[currentIndex].transform.position = new Vector2(xPos, yPos);
+            currentIndex++;
+            if (currentIndex >= count)
+            {
+                currentIndex = 0;
+            }
+        }
     }
 }

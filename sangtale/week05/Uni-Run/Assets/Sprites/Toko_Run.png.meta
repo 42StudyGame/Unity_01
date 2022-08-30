@@ -27,7 +27,7 @@ TextureImporter:
       213: 21300014
     second: Toko_Run_7
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -44,7 +44,6 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
@@ -88,8 +87,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
-  swizzle: 50462976
-  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -126,7 +123,31 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -145,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29e683bfde4fd4c77832b3df397eb004
-      internalID: -936432449
+      spriteID: 8b64adda3df40a549839d5180c8e487f
+      internalID: -1253291634
       vertices: []
       indices: 
       edges: []
@@ -166,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8daedde9f8b540e5856c44feb530974
-      internalID: 1548172266
+      spriteID: 4146b5e6dcd4c0744bd9bf4a17129a2a
+      internalID: -1282662148
       vertices: []
       indices: 
       edges: []
@@ -187,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10aa7c51937d449d79435d456018b76f
-      internalID: -1351181935
+      spriteID: 2e823cc1037ed8147ac5b55225844960
+      internalID: -639194125
       vertices: []
       indices: 
       edges: []
@@ -208,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f62149443d23a4908b028bfed3cbc351
-      internalID: 441525973
+      spriteID: 5bba4e9af910d43409615f174cd82364
+      internalID: 515839946
       vertices: []
       indices: 
       edges: []
@@ -229,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 972f6d2830bf54ff5b47320f4fcd33c2
-      internalID: 481072747
+      spriteID: d2b1108374262504a9d24266eb9e9f4c
+      internalID: -1159148542
       vertices: []
       indices: 
       edges: []
@@ -250,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3f8b215c247e4cbcb2620392202b346
-      internalID: -763317971
+      spriteID: 4da0bbd2dd275aa48ac2f04f51442874
+      internalID: -1712482532
       vertices: []
       indices: 
       edges: []
@@ -271,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efea74681ada94e5ab3cdd38a2ac3743
-      internalID: 1165324935
+      spriteID: 3f9c5076ca703a641a86dd352eb190e1
+      internalID: -1220866716
       vertices: []
       indices: 
       edges: []
@@ -292,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6dce254c631c44439f19b221e510d4b
-      internalID: -117404980
+      spriteID: 341a3983f7d7fe844baf8cb1db790a9b
+      internalID: -51932383
       vertices: []
       indices: 
       edges: []
@@ -309,16 +330,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Toko_Run_2: -1351181935
-      Toko_Run_7: -117404980
-      Toko_Run_5: -763317971
-      Toko_Run_3: 441525973
-      Toko_Run_4: 481072747
-      Toko_Run_1: 1548172266
-      Toko_Run_0: -936432449
-      Toko_Run_6: 1165324935
+      Toko_Run_2: -639194125
+      Toko_Run_7: -51932383
+      Toko_Run_5: -1712482532
+      Toko_Run_3: 515839946
+      Toko_Run_4: -1159148542
+      Toko_Run_1: -1282662148
+      Toko_Run_0: -1253291634
+      Toko_Run_6: -1220866716
   spritePackingTag: Toko
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
