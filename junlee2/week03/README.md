@@ -36,3 +36,6 @@
         - 어림도 없지!
         - 이전에 작업물들을 정리한 글이 없어서 다 까먹었음
     - 이제 열심히 정리하자 간단히라도!
+
+- 영상
+    - https://drive.google.com/file/d/1JDQgVqgvIPkZH0PEZfL0Y733Ajh4Ekk3/view?usp=sharing
