@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         gameoverText.SetActive(false);
         lifeText = GameObject.Find("LifeText").GetComponent<TextMeshProUGUI>();
         timeText = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
-        recordText = GameObject.Find("RecordText").GetComponent<TextMeshProUGUI>();
+        recordText = gameoverText.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
