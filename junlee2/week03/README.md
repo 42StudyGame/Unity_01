@@ -39,3 +39,10 @@
 
 - 영상
     - https://drive.google.com/file/d/1JDQgVqgvIPkZH0PEZfL0Y733Ajh4Ekk3/view?usp=sharing
+- 사용한 에셋
+    - 총알 택스쳐
+    - https://assetstore.unity.com/packages/2d/textures-materials/metals/yughues-free-metal-materials-12949
+    - 플레이어 & 적
+    - https://assetstore.unity.com/packages/3d/characters/humanoids/sci-fi/stylized-astronaut-114298
+    - 나무, 플레인
+    - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
