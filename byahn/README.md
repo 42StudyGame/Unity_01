@@ -2,6 +2,8 @@
 
 # Mento : m-jfeel
 
+# Mentee : byahn (nonoaa)
+
 # curriculum
 
 ## BOOK : 레트로의 유니티 게임프로그래밍
