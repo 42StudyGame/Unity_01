@@ -2,6 +2,8 @@
 
 ## 8주차 내용
 - 8주차: 7부 네트워크 협동 게임: 좀비 서바이버 멀티플레이어 (816p - 933p)
+	- 실행 영상
+		- https://drive.google.com/file/d/1pXzuRle1sJmrBkYRJ22eG9er0U2v927H/view?usp=sharing
 
 ## 내용 정리
 ### 18장 좀비 서바이버 : 멀티 플레이어
